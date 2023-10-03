@@ -82,17 +82,36 @@ for i in range(4):
 # predict y4=y(x4)
 x4 = x[3] + h
 y4p = y[0] + (4 * h / 3) * (2 * f[1] - f[2] + 2 * f[3])
-pred = 1
+predictor = 1
 print("\n The predicted value at x4 = %.4f is y4p=%.5f\n" % (x4, y4p))
 # correction
 for i in range(3):
     f4p = func(x4, y4p)
     y4c = y[2] + (h / 3) * (f[2] + 4 * f[3] + f4p)
-    y4p = pred
+    y4p = predictor
     print(
         f"The corrected value at x4-%.4f in iteration {i+1} is y4cfi+1)-%.5f"
         % (x4, y4c)
     )
+
+
+# Runge Kutta method
+f = lambda x, y: 1 + y / x
+x0 = (float, input("Enter x0"))
+y0 = (float, input("Enter Value of y0"))
+h = float(input("Enter Value of h"))
+x1 = x0 + h
+k1 = h * f(x0, y0)
+k2 = h * f(x0 + h / 2, y0 + k1 / 2)
+k3 = h * f(x0 + h / 2, y0 + k2 / 2)
+k4 = h * f(x0 + h, y0 + k3)
+y1 = y0 + (1 / 6) * (k1 + 2 * k2 + 2 * k3 + k4)
+print(" k1=", k1)
+print(" k2=", k2)
+print(" k3=", k3)
+print(" k4=", k4)
+
+print(" y(%0.2f)=%.4f" % (x1, y1))
 
 
 # Initaiate Flask Application
@@ -105,5 +124,5 @@ def home():
 
 
 # Start the flask app
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+"""if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000)"""

@@ -1,3 +1,7 @@
+<!-- Flask Links -->
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script> -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +9,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VTU HUB</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
-    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <script src="../static/js/script.js" defer></script>
 </head>
 
 <body>
-    <h1 id="main-heading">VTU STUDENT HUB</h1>
+    <h1 id="main-heading"><a href="">VTU STUDENT HUB</a></h1>
+    <nav id="student-nav">
+        <ul id="student-options-list">
+            <li class="student-options-item"><a href="./index.html">Home</a></li>
+            <li class="student-options-item"><a href="./about-us.html">About Us</a></li>
+            <li class="student-options-item"><a href="./problem-solvers.html">Problem Solvers</a></li>
+            <li class="student-options-item"><a href="./gpa-calculators.html">GPA Calculators</a></li>
+        </ul>
+    </nav>
 </body>
 
 </html>
