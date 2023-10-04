@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap");
+
+* {
+  font-family: "Gabarito", cursive;
+}
+
+body {
+  background-color: rgb(41, 41, 89);
+  margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+main {
+  display: grid;
+  place-content: center;
+}
+
+#main-heading {
+  width: 100%;
+  text-align: center;
+  color: rgb(211, 211, 90);
+}
+
+#subjects-list {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+  gap: 3rem;
+  padding: 0;
+}
+
+.subjects-list-item a {
+  text-decoration: none;
+  color: rgb(211, 211, 90);
+}
+
+#page-description {
+  color: rgb(211, 211, 90);
+}

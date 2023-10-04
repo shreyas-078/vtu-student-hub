@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap');
+
 * {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Gabarito', cursive;
 }
 
 body {
@@ -54,7 +56,7 @@ body {
     border-bottom: 0;
     height: 100%;
     width: 100%;
-    transition: 0.5s ease-in-out all;
+    transition: 0.5s ease all;
 }
 
 .student-options-item a::after {
@@ -68,11 +70,11 @@ body {
     border-top: 0;
     height: 100%;
     width: 100%;
-    transition: 0.3s ease-in-out all;
+    transition: 0.3s ease all;
 }
 
 .student-options-item a:hover:after,
 .student-options-item a:hover:before {
     width: 20%;
-    height: 30%;
+    height: 35%;
 }

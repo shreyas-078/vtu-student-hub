@@ -123,6 +123,11 @@ def home():
     return render_template("index.html")
 
 
+@app.route("/problem-solvers")
+def problem_solvers():
+    return render_template("problem-solvers.html")
+
+
 # Start the flask app
 """if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)"""
