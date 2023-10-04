@@ -12,28 +12,42 @@ app = Flask(__name__, static_url_path="/static", static_folder="static")
 # Route to solve Milne Predictor - Corrector method
 @app.route("/milne-pc", methods=["POST"])
 def milne_pc():
-    func = lambda x, y: x**2 + y**2
-    x = [0, 0.1, 0.2, 0.3]
-    y = [1, 1.1113, 1.2507, 1.426]
-    h = 0.1
+    answer = []
+    data = request.get_json()
+    func_exp = data.get("f")
+    func = lambda x, y: eval(func_exp)
+    x = [
+        float(data.get("x0")),
+        float(data.get("x1")),
+        float(data.get("x2")),
+        float(data.get("x3")),
+    ]
+    y = [
+        float(data.get("y0")),
+        float(data.get("y1")),
+        float(data.get("y2")),
+        float(data.get("y3")),
+    ]
+    h = x[1] - x[0]
     f = []
 
     for i in range(4):
         f.append(func(x[i], y[i]))
-        print(f"x{i}-%.4f\ty{i}-%.4f\tf{i}=%0.4f" % (x[i], y[i], f[i]))
 
     # Predict y4 = y(x4)
     x4 = x[3] + h
     y4p = y[0] + (4 * h / 3) * (2 * f[1] - f[2] + 2 * f[3])
     predictor = 1
-    print("\n The predicted value at x4 = %.4f is y4(p) = %.5f\n" % (x4, y4p))
+    answer.append(y4p)
 
     # Correction
     for i in range(3):
         f4p = func(x4, y4p)
         y4c = y[2] + (h / 3) * (f[2] + 4 * f[3] + f4p)
         y4p = predictor
-        print(f"The corrected value at x4-%.4f in iteration {i+1} is -%.5f" % (x4, y4c))
+        answer.append(y4c)
+
+    return jsonify(answer)
 
 
 # Runge Kutta method solver route
