@@ -1,0 +1,16 @@
+#rk-heading {
+    font-size: 2rem;
+}
+
+body {
+    background-color: rgb(41, 41, 89);
+    color: rgb(211, 211, 90);
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.invisible {
+    display: none;
+}

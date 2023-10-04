@@ -1,0 +1,17 @@
+body {
+    background-color: rgb(41, 41, 89);
+    color: rgb(211, 211, 90);
+}
+
+#milne-pc-heading {
+    font-size: 2rem;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+
+.invisible {
+    display: none;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milne PC Solver</title>
+    <script src="{{ url_for('static', filename='js/subjects/math/milne-pc.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/milne-pc.css') }}">
+</head>
+
+<body>
+    <section id="milne-pc-solver">
+        <p class="heading" id="milne-pc-heading">Milne's Predictor Corrector Method Solver</p>
+        <div id="milne-pc-function">
+            <label for="milne-pc-function-input">Input Function</label>
+            <input type="text" id="milne-pc-function-input" placeholder="x**2 + y**2">
+        </div>
+        <div id="milne-pc-x0">
+            <label for="milne-pc-x0-input">Enter X0</label>
+            <input type="number" id="milne-pc-x0-input">
+        </div>
+        <div id="milne-pc-y0">
+            <label for="milne-pc-y0-input">Input Y0</label>
+            <input type="number" id="milne-pc-y0-input">
+        </div>
+        <div id="milne-pc-x1">
+            <label for="milne-pc-x1-input">Enter X1</label>
+            <input type="number" id="milne-pc-x1-input">
+        </div>
+        <div id="milne-pc-y1">
+            <label for="milne-pc-x1-input">Enter Y1</label>
+            <input type="number" id="milne-pc-y1-input">
+        </div>
+        <div id="milne-pc-x2">
+            <label for="milne-pc-x2-input">Enter X2</label>
+            <input type="number" id="milne-pc-x2-input">
+        </div>
+        <div id="milne-pc-y2">
+            <label for="milne-pc-y2-input">Enter Y2</label>
+            <input type="number" id="milne-pc-y2-input">
+        </div>
+        <div id="milne-pc-x3">
+            <label for="milne-pc-x3-input">Enter X3</label>
+            <input type="number" id="milne-pc-x3-input">
+        </div>
+        <div id="milne-pc-y3">
+            <label for="milne-pc-y3-input">Enter Y3</label>
+            <input type="number" id="milne-pc-y3-input">
+        </div>
+        <div id="milne-pc-buttons-section">
+            <button class="btn btn-milne-pc-answer">Calculate</button>
+            <button class="btn btn-milne-pc-clear">Clear</button>
+        </div>
+        <div id="milne-pc-answer">
+            <p id="milne-pc-helper-text" class="invisible">Please Enter Proper Values.</p>
+            <p id="milne-pc-y4p"></p>
+            <p id="milne-pc-y4c"></p>
+        </div>
+    </section>
+
+</body>
+
+</html>
