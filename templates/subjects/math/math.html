@@ -5,13 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math Solvers</title>
-    <script src="{{ url_for('static', filename='js/subjects/math.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/subjects/math/math.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/math.css') }}">
 </head>
 
 <body>
     <h1 id="math-solvers-heading">MATH SOLVERS</h1>
-    <a href="/runge-kutta-template">Runge Kutta Solver ></a><br>
+    <a href="/runge-kutta-template">Runge Kutta Solver ></a>
     <a href="/milne-pc-template">Milne's Predictor Corrector Method Solver ></a>
+    <a href="/euler-template">Euler's Method Solver ></a>
+    <a href="/mod-euler-template">Modified Euler's Method Solver ></a>
+    <a href="/newton-raphson-template">Newton Raphson Method Solver ></a>
+    <a href="/regula-falsi-template">Regula Falsi Method Solver ></a>
+    <a href="/inter-extrapolation-template">Interpolation/Extrapolation Solver ></a>
+    <a href="/dd-solver-template">Divided Difference Solver ></a>
+    <a href="/trapezoidal-template">Trapezoidal Solver ></a>
+    <a href="/simpson-template">Simpson's Rules Solver ></a>
 </body>
 
 </html>
