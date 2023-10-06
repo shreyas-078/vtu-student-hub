@@ -15,7 +15,7 @@ def milne_pc():
     answer = []
     data = request.get_json()
     func_exp = data.get("f")
-    func = lambda x, y: eval(func_exp)
+    func = lambda x, y: eval(func_exp)  # SERVER BREAKER, FIX BY ADDING REGEX IN JS
     x = [
         float(data.get("x0")),
         float(data.get("x1")),
@@ -41,7 +41,7 @@ def milne_pc():
     answer.append(y4p)
 
     # Correction
-    for i in range(3):
+    for i in range(1, 4):
         f4p = func(x4, y4p)
         y4c = y[2] + (h / 3) * (f[2] + 4 * f[3] + f4p)
         y4p = predictor

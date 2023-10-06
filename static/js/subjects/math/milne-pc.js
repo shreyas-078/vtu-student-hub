@@ -16,7 +16,7 @@ mpcCalculateButton.addEventListener("click", () => {
 
     fetch("/milne-pc", {
         method: "POST",
-        headers: { ContentType: "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             f: mpcFunction,
             x0: mpcX0,
@@ -30,8 +30,9 @@ mpcCalculateButton.addEventListener("click", () => {
         }),
     }).then((response) => {
         if (response.ok) {
-            console.log(response.json());
-            return response.json().then((data) => {});
+            return response.json().then((data) => {
+                console.log(data);
+            });
         } else {
             console.error("Error:", response.status, response.statusText);
         }
