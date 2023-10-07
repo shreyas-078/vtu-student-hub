@@ -180,6 +180,11 @@ def problem_solvers():
     return render_template("problem-solvers.html")
 
 
+@app.route("/gpa-calculators")
+def gpa_calculators():
+    return render_template("gpa-calculators.html")
+
+
 # Route to redirect to math problem solvers page
 @app.route("/math")
 def math_page():
@@ -198,9 +203,14 @@ def milne_pc_page():
     return render_template("subjects/math/milne-pc.html")
 
 
-@app.route("/euler-tempate")
+@app.route("/euler-template")
 def euler_template_page():
     return render_template("subjects/math/euler.html")
+
+
+@app.route("/physics")
+def physics():
+    return render_template("subjects/physics/physics.html")
 
 
 # Start the flask app
