@@ -1,6 +1,6 @@
 # Imports
 from flask import Flask, render_template, jsonify, request  # Web Server
-from sympy import symbols, diff, exp  # Math eval
+from sympy import symbols, diff, exp, lambdify, pprint, simplify  # Math eval
 from numpy import array, zeros  # Math eval
 import math
 
@@ -113,6 +113,53 @@ def mod_euler():
         else:
             y1E = y1
     print(f"\n y({x1})=%.4f " % y1)
+
+
+# INTERPOLATION
+@app.route("/interpolation-solver")
+def interpolation_solver():
+    n = int(input("Enter number of data points : "))
+    x = zeros((n))
+    y = zeros((n, n))
+    # Reading data points
+    print("Enter data for x and y: ")
+    for i in range(n):
+        x[i] = float(input("x[" + str(i) + "]= "))
+        y[i][0] = float(input("y[" + str(i) + "]= "))
+    # Generating forward difference table
+    for i in range(1, n):
+        for j in range(0, n - i):
+            y[j][i] = y[j + 1][i - 1] - y[j][i - 1]
+
+    print("\ nFORWARD DIFFERENCE TABLE \n")
+
+    for i in range(0, n):
+        print("%0.2f " % (x[i]), end="")
+        for j in range(0, n - i):
+            print("\t\t%0.2f " % (y[i][j]), end="")
+        print()
+    # obtaining the polynomial
+
+    t = symbols("t")
+    f = []
+
+    p = (t - x[0]) / (x[1] - x[0])
+    f.append(p)
+    for i in range(1, n - 1):
+        f.append(f[i - 1] * (p - i) / (i + 1))
+        poly = y[0][0]
+    for i in range(n - 1):
+        poly = poly + y[0][i + 1] * f[i]
+    simp_poly = simplify(poly)
+    print("\ nTHE INTERPOLATING POLYNOMIAL IS\n")
+    pprint(simp_poly)
+    # if you want to interpolate at some point the next session will help
+    inter = input("Do you want to interpolate at a point (y/n)? ")  # y
+    if inter == "y":
+        a = float(input("enter the point "))  # 2
+        interpol = lambdify(t, simp_poly)
+        result = interpol(a)
+        print("\ nThe value of the function at ", a, "is\n", result)
 
 
 # Home Route for Homepage
