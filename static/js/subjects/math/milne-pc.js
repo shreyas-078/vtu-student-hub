@@ -31,7 +31,15 @@ mpcCalculateButton.addEventListener("click", () => {
     }).then((response) => {
         if (response.ok) {
             return response.json().then((data) => {
-                console.log(data);
+                const answerDiv = document.querySelector("#milne-pc-answer");
+                answerDiv.querySelector("#milne-pc-y4p").textContent =
+                    "Y4 Predicted = " + data[0].toFixed(4);
+                answerDiv.querySelector("#milne-pc-y4c-1").textContent =
+                    "Y4 Corrected Iteration 1 = " + data[1].toFixed(4);
+                answerDiv.querySelector("#milne-pc-y4c-2").textContent =
+                    "Y4 Corrected Iteration 2 = " + data[2].toFixed(4);
+                answerDiv.querySelector("#milne-pc-y4c-3").textContent =
+                    "Y4 Corrected Iteration 3 = " + data[3].toFixed(4);
             });
         } else {
             console.error("Error:", response.status, response.statusText);

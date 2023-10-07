@@ -36,15 +36,14 @@ def milne_pc():
 
     # Predict y4 = y(x4)
     x4 = x[3] + h
-    y4p = y[0] + (4 * h / 3) * (2 * f[0] - f[1] + 2 * f[2])
-    predictor = 1
+    y4p = y[0] + (4 * h / 3) * (2 * f[1] - f[2] + 2 * f[3])
+    # predictor = 1
     answer.append(y4p)
-
     # Correction
     for i in range(1, 4):
         f4p = func(x4, y4p)
-        y4c = y[1] + (h / 3) * (f[0] + 4 * f[2] + f4p)
-        y4p = predictor
+        y4c = y[2] + (h / 3) * (f[2] + 4 * f[3] + f4p)
+        y4p = y4c
         answer.append(y4c)
 
     return jsonify(answer)
@@ -150,6 +149,11 @@ def runge_kutta_home():
 @app.route("/milne-pc-template")
 def milne_pc_page():
     return render_template("subjects/math/milne-pc.html")
+
+
+@app.route("/euler-tempate")
+def euler_template_page():
+    return render_template("subjects/math/euler.html")
 
 
 # Start the flask app
