@@ -2,7 +2,7 @@
 from flask import Flask, render_template, jsonify, request  # Web Server
 from sympy import symbols, diff, exp, lambdify, pprint, simplify  # Math eval
 from numpy import array, zeros  # Math eval
-import math
+import math  # More Math Eval
 
 
 # Initaiate Flask Application
@@ -72,13 +72,16 @@ def runge_kutta():
 # Euler method
 @app.route("/euler", methods=["POST"])
 def euler():
-    def f(x, y):
-        return x + y  # INPUT FUNCTION
+    data = request.get_json()
+    func = data.get("function")
 
-    x0 = float(input("Enter x0="))
-    y0 = float(input("Enter y0="))
-    h = float(input("Enter h="))
-    n = int(input("Enter n="))
+    def f(x, y):
+        return eval(func)  # INPUT FUNCTION ADD REGEX
+
+    x0 = float(data.get("x0"))
+    y0 = float(data.get("y0"))
+    h = float(data.get("h"))
+    n = float(data.get("n"))
 
     for i in range(n + 1):
         y1 = y0 + h * f(x0, y0)

@@ -14,3 +14,7 @@ body {
     align-items: center;
     font-size: large;
 }
+
+button {
+    cursor: pointer;
+}
