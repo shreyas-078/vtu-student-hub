@@ -97,15 +97,19 @@ def euler():
 # Modified Euler
 @app.route("/mod-euler", methods=["POST"])
 def mod_euler():
-    f = lambda x, y: x + y  # INPUT FUNCTION
-    x0 = float(input("Enter x0 value"))
-    y0 = float(input("Enter y0 value"))
-    h = float(input("Enter h value"))
-    n = int(input("Enter the maximum number iterations needs to be performed: "))
+    data = request.get_json()
+    func = data.get("F")
+
+    f = lambda x, y: eval(func)  # INPUT FUNCTION ADD REGEX
+    x0 = float(data.get("X0"))
+    y0 = float(data.get("Y0"))
+    h = float(data.get("H"))
+    n = int(data.get("N"))
     x1 = x0 + h
     y1E = y0 + h * f(x0, y0)
+
     print("\n Initial guess by Euler's method is x-%0.2f y=%0.4f" % (x1, y1E))
-    print("By Modified Euler's Method")
+
     print(f"Iteration\t \ty1({x1})")
     for i in range(n):
         y1 = y0 + (h / 2) * (f(x0, y0) + f(x1, y1E))
@@ -114,6 +118,7 @@ def mod_euler():
             break
         else:
             y1E = y1
+
     print(f"\n y({x1})=%.4f " % y1)
 
 
@@ -208,6 +213,11 @@ def milne_pc_page():
 @app.route("/euler-template")
 def euler_template_page():
     return render_template("subjects/math/euler.html")
+
+
+@app.route("/mod-euler-template")
+def euler_template_page():
+    return render_template("subjects/math/mod-euler.html")
 
 
 @app.route("/physics")
