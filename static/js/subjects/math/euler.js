@@ -1,11 +1,11 @@
 const calculateButton = document.getElementById("calculate-euler");
 
 calculateButton.addEventListener("click", () => {
-    const eulerFunction = document.getElementById("function");
-    const eulerX0 = document.getElementById("x0");
-    const eulerY0 = document.getElementById("y0");
-    const eulerN = document.getElementById("n");
-    const eulerH = document.getElementById("h");
+    const eulerFunction = document.getElementById("function").value;
+    const eulerX0 = document.getElementById("x0").value;
+    const eulerY0 = document.getElementById("y0").value;
+    const eulerN = document.getElementById("n").value;
+    const eulerH = document.getElementById("h").value;
     fetch("/euler", {
         method: "POST",
         headers: {
@@ -25,8 +25,10 @@ calculateButton.addEventListener("click", () => {
             }
         })
         .then((data) => {
-            console.log(data);
+            const ansPara = document.getElementById("final-ans");
+            for (let i = 0; i < eulerN + 1; i++) {
+                ansPara.innerHTML +=
+                    "<br>" + `Y at + ${data[i][0]} = ${data[i][1]}`;
+            }
         });
 });
-
-console.log(calculateButton);

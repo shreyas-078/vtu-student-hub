@@ -75,24 +75,23 @@ def euler():
     data = request.get_json()
     func = data.get("function")
 
+    ans = []
+
     def f(x, y):
         return eval(func)  # INPUT FUNCTION ADD REGEX
 
-    x0 = float(data.get("x0"))
-    y0 = float(data.get("y0"))
-    h = float(data.get("h"))
-    n = float(data.get("n"))
+    x0 = float(data.get("X0"))
+    y0 = float(data.get("Y0"))
+    h = float(data.get("H"))
+    n = int(data.get("N"))
 
     for i in range(n + 1):
         y1 = y0 + h * f(x0, y0)
         x0 = x0 + h
         y0 = y1
-        print("The value of y at x", round(x0, 2), "is=", round(y0, 4))
+        ans.append((round(x0, 2), round(y0, 4)))
 
-    def f(x):
-        return -1 - x + math.exp(x)
-
-    print("exact solution at one=", round(f(1), 4))
+    return jsonify(ans)
 
 
 # Modified Euler
