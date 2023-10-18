@@ -108,18 +108,20 @@ def mod_euler():
     x1 = x0 + h
     y1E = y0 + h * f(x0, y0)
 
-    print("\n Initial guess by Euler's method is x-%0.2f y=%0.4f" % (x1, y1E))
+    init_guess = (x1, y1E)
+    ans_iterations = []
 
-    print(f"Iteration\t \ty1({x1})")
     for i in range(n):
         y1 = y0 + (h / 2) * (f(x0, y0) + f(x1, y1E))
-        print(i + 1, "\t\t\t%.4f" % y1)
+        ans_iterations.append(y1)
         if abs(y1 - y1E) < 0.0001:
             break
         else:
             y1E = y1
 
-    print(f"\n y({x1})=%.4f " % y1)
+    final_y1 = y1
+
+    return jsonify([init_guess, ans_iterations, final_y1])
 
 
 # INTERPOLATION
@@ -216,7 +218,7 @@ def euler_template_page():
 
 
 @app.route("/mod-euler-template")
-def euler_template_page():
+def mod_euler_template_page():
     return render_template("subjects/math/mod-euler.html")
 
 

@@ -5,9 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modified Euler Method Solver</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/mod-euler.css') }}">
+    <script src="{{ url_for('static', filename='js/subjects/math/mod-euler.js') }}" defer></script>
 </head>
 
 <body>
+    <h1 id="mod-euler-heading">Modified Euler's Method Solver</h1>
+    <div class="mod-euler-function">
+        <label for="function">Function:</label>
+        <input type="text" name="" id="function" placeholder="x**2 + y**2">
+    </div>
+    <div class="mod-euler-x0">
+        <label for="x0">X0:</label>
+        <input type="number" name="" id="x0">
+    </div>
+    <div class="mod-euler-y0">
+        <label for="y0">Y0:</label>
+        <input type="number" name="" id="y0">
+    </div>
+    <div class="mod-euler-n">
+        <label for="n">N:</label>
+        <input type="number" name="" id="n">
+    </div>
+    <div class="mod-euler-h">
+        <label for="h">Step (H):</label>
+        <input type="number" name="" id="h">
+    </div>
+    <div class="buttons">
+        <button id="calculate-mod-euler">Calculate</button>
+        <button id="reset-mod-euler">Reset</button>
+    </div>
+    <div class="answer-mod-euler">
+        <p id="final-ans"></p>
+    </div>
 
 </body>
 
