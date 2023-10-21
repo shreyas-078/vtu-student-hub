@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regula Falsi Solver</title>
+  <script src="{{ url_for('static', filename='js/subjects/math/regula-falsi.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/regula-falsi.css') }}">
+</head>
+
+<body>
+  <h1 id="Regula-Falsi">Regula-Falsi Solver</h1>
+  <div class="rf-function">
+    <label for="function">Enter the function:</label>
+    <input type="text" id="function">
+  </div>
+  <div class="rf-a-value">
+    <label for="a-value">Enter value of a : </label>
+    <input type="text" id="a-value">
+  </div>
+  <div class="rf-b-value">
+    <label for="b-value">Enter value of b : </label>
+    <input type="text" id="b-value">
+  </div>
+  <div class="rf-iterations">
+    <label for="iterations">Enter Number of Iterations:</label>
+    <input type="text" id="iterations">
+  </div>
+  <div class="control-buttons">
+    <button type="button" class="calculate-btn">Calculate</button>
+    <button type="button" class="reset-btn">Reset</button>
+  </div>
+</body>
+
+</html>
