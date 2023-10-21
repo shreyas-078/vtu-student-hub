@@ -4,11 +4,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Newton Raphson Method</title>
+  <title>Newton Raphson Solver</title>
+  <script src="{{ url_for('static', filename='js/subjects/math/newton-raphson.js') }}" defer></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/newton-raphson.css') }}">
 </head>
 
 <body>
-
+  <h1 id="newton-raphson-heading">Newton Raphson Solver</h1>
+  <div class="nr-function">
+    <label for="function">Enter the function:</label>
+    <input type="text" id="function" placeholder="x ** 2">
+  </div>
+  <div class="nr-initial-approximation">
+    <label for="initial-approximation">Enter initial Approximation:</label>
+    <input type="text" id="initial-approximation">
+  </div>
+  <div class="nr-iterations">
+    <label for="iterations">Enter Number of Iterations:</label>
+    <input type="text" id="iterations">
+  </div>
+  <div class="control-buttons">
+    <button type="button" class="calculate-btn">Calculate</button>
+    <button type="button" class="reset-btn">Reset</button>
+  </div>
+  <div class="ans-para">
+    <p id="answer-text"></p>
+  </div>
 </body>
 
 </html>

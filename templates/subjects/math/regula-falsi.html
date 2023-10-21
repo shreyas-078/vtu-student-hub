@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Regula Falsi Solver</title>
-  <script src="{{ url_for('static', filename='js/subjects/math/regula-falsi.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/subjects/math/regula-falsi.js') }}" defer></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/regula-falsi.css') }}">
 </head>
 
@@ -13,7 +13,7 @@
   <h1 id="Regula-Falsi">Regula-Falsi Solver</h1>
   <div class="rf-function">
     <label for="function">Enter the function:</label>
-    <input type="text" id="function">
+    <input type="text" id="function" placeholder="x ** 2">
   </div>
   <div class="rf-a-value">
     <label for="a-value">Enter value of a : </label>

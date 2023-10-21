@@ -171,6 +171,152 @@ def interpolation_solver():
         print("\ nThe value of the function at ", a, "is\n", result)
 
 
+# NEWTON-RAPHSON
+@app.route("/newton-raphson-calci", methods=["POST"])
+def newton_raphson_solver():
+    answer = []
+
+    data = request.get_json()
+    x = symbols("x")
+    func = data.get("nrFunction")
+
+    g = eval(func)  # ADD REGEX OR SOMETHING
+    f = lambdify(x, g)
+    dg = diff(g)
+    df = lambdify(x, dg)
+
+    x0 = float(data.get("initApproximation"))
+    n = int(data.get("iterations"))
+
+    for i in range(1, n + 1):
+        x1 = x0 - (f(x0) / df(x0))
+        answer.append((i, x1, f(x1)))
+        x0 = x1
+
+    return jsonify(answer)
+
+
+# Regula Falsi calculator method
+@app.route("/regula-falsi-calci", methods=["POST"])
+def regula_falsi_solver():
+    answer = []
+    data = request.get_json()
+    x = symbols("x")
+    func = data.get("rfFunction")
+    g = eval(func)
+    f = lambdify(x, g)
+    a = float(data.get("rfA"))
+    b = float(data.get("rfB"))
+    N = int(data.get("iterations"))
+    for i in range(1, N + 1):
+        c = (a * f(b) - b * f(a)) / (f(b) - f(a))
+        if f(a) * f(c) < 0:
+            b = c
+        else:
+            a = c
+        answer.append((i, c, f(c)))
+    return answer
+
+
+# Trapezoidal Rule Method
+@app.route("/trapezoidal-rule-calci")
+def trapezoidal_rule_solver():
+    data = request.get_json()
+    func = data.get("F")
+
+    # Definition of the function to integrate
+    def my_func(x):
+        return eval(func)
+
+    # Function to implement trapezoidal method
+    def trapezoidal(x0, xn, n):
+        h = (xn - x0) / n  # Calculating step size
+
+        # Finding sum
+        integration = my_func(x0) + my_func(xn)  # Adding first and last terms
+
+        for i in range(1, n):
+            k = x0 + i * h  # i-th step value
+            integration = integration + 2 * my_func(k)  # Adding areas of the trapezoids
+
+        # Proportioning sum of trapezoid areas
+        integration = integration * h / 2
+        return integration
+
+    # Input section
+
+    lower_limit = float(input(" Enter lower limit of integration : "))
+    upper_limit = float(input(" Enter upper limit of integration : "))
+    sub_interval = int(input(" Enter number of sub intervals : "))
+    # Call trapezoidal () method and get result
+    result = trapezoidal(lower_limit, upper_limit, sub_interval)
+    # Print result
+    print(" Integration result by Trapezoidal method is: ", result)
+
+
+# Simpsons 1/3rd Rule
+@app.route("/simpson-1-3-calci")
+def simpson_1_3_rule_solver():
+    data = request.get_json()
+    func = data.get("F")
+
+    # Definition of the function to integrate
+    def my_func(x):
+        return eval(func)
+
+    # Function to implement the Simpson 's one - third rule
+    def simpson13(x0, xn, n):
+        h = (xn - x0) / n  # calculating step size
+        # Finding sum
+        integration = my_func(x0) + my_func(xn)
+        k = x0
+        for i in range(1, n):
+            if i % 2 == 0:
+                integration = integration + 4 * my_func(k)
+            else:
+                integration = integration + 2 * my_func(k)
+            k += h
+
+        # Finding final integration value
+        integration = integration * h * (1 / 3)
+        return integration
+        # Input section
+
+    lower_limit = float(input(" Enter lower limit of integration : "))
+    upper_limit = float(input(" Enter upper limit of integration : "))
+    sub_intervals = int(input(" Enter number of sub intervals : "))
+    # Call simpson13 () method and get result
+    result = simpson13(lower_limit, upper_limit, sub_intervals)
+    print(" Integration result by Simpson 's 1/3 method is: %0.6f" % (result))
+
+
+# Simpsons_3_8_rule
+@app.route("/simpson-1-3-calci")
+def simpson_1_3_rule_solver():
+    data = request.get_json()
+    func = data.get("F")
+
+    def f(x):
+        eval(func)  # function here
+
+    def simpsons_3_8_rule(f, a, b, n):
+        h = (b - a) / n
+        s = f(a) + f(b)
+        for i in range(1, n, 3):
+            s += 3 * f(a + i * h)
+        for i in range(3, n - 1, 3):
+            s += 3 * f(a + i * h)
+        for i in range(2, n - 2, 3):
+            s += 2 * f(a + i * h)
+        return s * 3 * h / 8
+
+    lower_limit = float(input(" Enter lower limit of integration : "))
+    upper_limit = float(input(" Enter upper limit of integration : "))
+    sub_intervals = int(input(" Enter number of sub intervals : "))
+    result = simpsons_3_8_rule(f, lower_limit, upper_limit, sub_intervals)
+    print("%3.5f " % result)
+
+
 # Home Route for Homepage
 @app.route("/")
 def home():
@@ -217,14 +363,28 @@ def euler_template_page():
     return render_template("subjects/math/euler.html")
 
 
+# Render mod
 @app.route("/mod-euler-template")
 def mod_euler_template_page():
     return render_template("subjects/math/mod-euler.html")
 
 
+# Render the Physics homepage
 @app.route("/physics")
 def physics():
     return render_template("subjects/physics/physics.html")
+
+
+# Render the Newton Raphson Template Page
+@app.route("/newton-raphson-template")
+def newton_raphson_template():
+    return render_template("subjects/math/newton-raphson.html")
+
+
+# Render the Regula Falsi Page
+@app.route("/regula-falsi-template")
+def regula_falsi_template():
+    return render_template("subjects/math/regula-falsi.html")
 
 
 # Start the flask app

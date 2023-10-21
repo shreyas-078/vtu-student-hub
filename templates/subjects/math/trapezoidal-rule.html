@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trapezoidal Rule Solver</title>
-  <script src="{{ url_for('static', filename='js/subjects/math/regula-falsi.js') }}"></script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/regula-falsi.css') }}">
+  <script src="{{ url_for('static', filename='js/subjects/math/trapezoidal-rule.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/trapezoidal-rule.css') }}">
 </head>
 
 <body>
@@ -15,17 +15,17 @@
     <label for="function">Enter the function:</label>
     <input type="text" id="function">
   </div>
-  <div class="nr-a-value">
-    <label for="a-value">Enter value of a : </label>
-    <input type="text" id="a-value">
+  <div class="tr-lower-limit">
+    <label for="lower-limit">Enter Lower Limit of Integration : </label>
+    <input type="text" id="lower-limit">
   </div>
-  <div class="nr-b-value">
-    <label for="b-value">Enter value of b : </label>
-    <input type="text" id="b-value">
+  <div class="tr-upper-limit-value">
+    <label for="upper-limit-value">Enter Upper Limit of Integration : </label>
+    <input type="text" id="upper-limit-value">
   </div>
-  <div class="rf-iterations">
-    <label for="iterations">Enter Number of Iterations:</label>
-    <input type="text" id="iterations">
+  <div class="tr-sub-intervals">
+    <label for="sub-intervals">Enter Number of Sub-Intervals:</label>
+    <input type="text" id="sub-intervals">
   </div>
   <div class="control-buttons">
     <button type="button" class="calculate-btn">Calculate</button>
