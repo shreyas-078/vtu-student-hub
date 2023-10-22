@@ -291,8 +291,8 @@ def simpson_1_3_rule_solver():
 
 
 # Simpsons_3_8_rule
-@app.route("/simpson-1-3-calci")
-def simpson_1_3_rule_solver():
+@app.route("/simpson-3-8-calci")
+def simpson_3_8_rule_solver():
     data = request.get_json()
     func = data.get("F")
 
@@ -385,6 +385,12 @@ def newton_raphson_template():
 @app.route("/regula-falsi-template")
 def regula_falsi_template():
     return render_template("subjects/math/regula-falsi.html")
+
+
+# Render the Interpolation/Extrapolation Page
+@app.route("/inter-extrapolation-template")
+def inter_extrapolation_solver():
+    return render_template("subjects/math/inter-extrapolation.html")
 
 
 # Start the flask app

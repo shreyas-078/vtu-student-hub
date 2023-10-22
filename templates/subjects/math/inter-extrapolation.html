@@ -4,11 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Interpolation/Extrapolation Solver</title>
+  <script src="{{ url_for('static', filename='js/subjects/math/inter-extrapolation.js') }}" defer></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/inter-extrapolation.css') }}">
 </head>
 
 <body>
+  <h1 class="interpolation-extrapolation-heading">Interpolation/Extrapolation Solver</h1>
+  <h2 class="select-heading">Select Interpolation/Extrapolation</h2>
+  <select name="inter-extra">
+    <option value="">-- Select an option --</option>
+    <option value="inter">Interpolation</option>
+    <option value="extra">Extrapolation</option>
+  </select>
+  <section class="interpolation">
 
+  </section>
+  <section class="extrapolation">
+
+  </section>
 </body>
 
 </html>

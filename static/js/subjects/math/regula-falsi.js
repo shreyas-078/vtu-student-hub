@@ -26,6 +26,12 @@ calculateRfButton.addEventListener("click", () => {
       }
     })
     .then((data) => {
-      console.log(data);
+      for (let i = 0; i < data.length; i++) {
+        document.querySelector(
+          ".answer-text"
+        ).innerHTML += `<br> Iteration ${i}, X = ${data[i][1].toFixed(
+          4
+        )}, f(X) = ${data[i][2].toFixed(4)} `;
+      }
     });
 });
