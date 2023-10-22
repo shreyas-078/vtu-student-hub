@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap');
+
+* {
+  font-family: 'Gabarito', cursive;
+}
+
+body {
+  background-color: rgb(41, 41, 89);
+  color: rgb(211, 211, 90);
+}
+
+#milne-pc-solver {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  gap: 1rem;
+}
+
+#milne-pc-heading {
+  font-size: 2rem;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+
+.invisible {
+  display: none;
+}
