@@ -125,7 +125,7 @@ def mod_euler():
 
 
 # INTERPOLATION
-@app.route("/interpolation-solver")
+@app.route("/interpolation-solver", methods=["POST"])
 def interpolation_solver():
     n = int(input("Enter number of data points : "))
     x = zeros((n))
@@ -135,19 +135,20 @@ def interpolation_solver():
     for i in range(n):
         x[i] = float(input("x[" + str(i) + "]= "))
         y[i][0] = float(input("y[" + str(i) + "]= "))
+
     # Generating forward difference table
     for i in range(1, n):
         for j in range(0, n - i):
             y[j][i] = y[j + 1][i - 1] - y[j][i - 1]
 
-    print("\ nFORWARD DIFFERENCE TABLE \n")
+    print("\n FORWARD DIFFERENCE TABLE \n")
 
     for i in range(0, n):
         print("%0.2f " % (x[i]), end="")
         for j in range(0, n - i):
             print("\t\t%0.2f " % (y[i][j]), end="")
         print()
-    # obtaining the polynomial
+    # Obtaining the polynomial
 
     t = symbols("t")
     f = []
@@ -160,10 +161,11 @@ def interpolation_solver():
     for i in range(n - 1):
         poly = poly + y[0][i + 1] * f[i]
     simp_poly = simplify(poly)
-    print("\ nTHE INTERPOLATING POLYNOMIAL IS\n")
+    print("\n THE INTERPOLATING POLYNOMIAL IS \n")
     pprint(simp_poly)
-    # if you want to interpolate at some point the next session will help
-    inter = input("Do you want to interpolate at a point (y/n)? ")  # y
+
+    # If you want to interpolate at some point the next session will help
+    inter = input("Do you want to interpolate at a point (y/n)? ")  # Y
     if inter == "y":
         a = float(input("enter the point "))  # 2
         interpol = lambdify(t, simp_poly)

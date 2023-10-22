@@ -12,17 +12,37 @@
 <body>
   <h1 class="interpolation-extrapolation-heading">Interpolation/Extrapolation Solver</h1>
   <h2 class="select-heading">Select Interpolation/Extrapolation</h2>
-  <select name="inter-extra">
+  <select name="inter-extra" class="ip-ep-select">
     <option value="">-- Select an option --</option>
     <option value="inter">Interpolation</option>
     <option value="extra">Extrapolation</option>
   </select>
-  <section class="interpolation">
-
+  <button class="choice-btn" type="button">Choose</button>
+  <section class="interpolation invisible">
+    <div class="inter-num-data-points">
+      <label for="inter-num-data-points">Enter Number of Data Points</label>
+      <input type="number" id="inter-num-data-points">
+    </div>
+    <button type="button" id="btn-inter-apply-data-points">Apply</button>
+    <div class="inter-data-points">
+    </div>
+    <div class="button-controls">
+      <button type="button" class="btn-calculate-inter">Calculate</button>
+    </div>
   </section>
-  <section class="extrapolation">
-
+  <section class="extrapolation invisible">
+    <div class="num-data-points">
+      <label for="extra-num-data-points">Enter Number of Data Points</label>
+      <input type="number" id="extra-num-data-points">
+    </div>
+    <button type="button" id="btn-extra-apply-data-points">Apply</button>
+    <div class="extra-data-points">
+    </div>
+    <div class="button-controls">
+      <button type="button" class="btn-calculate-inter">Calculate</button>
+    </div>
   </section>
+  <button class="btn-reset" type="button">RESET</button>
 </body>
 
 </html>
