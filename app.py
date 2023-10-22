@@ -389,8 +389,32 @@ def regula_falsi_template():
 
 # Render the Interpolation/Extrapolation Page
 @app.route("/inter-extrapolation-template")
-def inter_extrapolation_solver():
+def inter_extrapolation_template():
     return render_template("subjects/math/inter-extrapolation.html")
+
+
+# Render the divided difference page
+@app.route("/dd-solver-template")
+def dd_solver_template():
+    return render_template("subjects/math/div-diff.html")
+
+
+# Render the Trapezoidal Rule Page
+@app.route("/trapezoidal-template")
+def trapezoidal_template():
+    return render_template("subjects/math/trapezoidal-rule.html")
+
+
+# Render the Simpson's Rule Solvers Template
+@app.route("/simpson-template")
+def simpson_template():
+    return render_template("subjects/math/simpson.html")
+
+
+# Render Lagrange Interpolation Page
+@app.route("/lagrange-template")
+def lagrange_template():
+    return render_template("subjects/math/lagrange.html")
 
 
 # Start the flask app
