@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trapezoidal Rule Solver</title>
-  <script src="{{ url_for('static', filename='js/subjects/math/trapezoidal-rule.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/subjects/math/trapezoidal-rule.js') }}" defer></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/trapezoidal-rule.css') }}">
 </head>
 
@@ -30,6 +30,9 @@
   <div class="control-buttons">
     <button type="button" class="calculate-btn">Calculate</button>
     <button type="button" class="reset-btn">Reset</button>
+  </div>
+  <div class="ans-para">
+    <p class="ans-text"></p>
   </div>
 </body>
 

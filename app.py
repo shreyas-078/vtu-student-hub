@@ -219,7 +219,7 @@ def regula_falsi_solver():
 
 
 # Trapezoidal Rule Method
-@app.route("/trapezoidal-rule-calci")
+@app.route("/trapezoidal-rule-calci", methods=["POST"])
 def trapezoidal_rule_solver():
     data = request.get_json()
     func = data.get("F")
@@ -244,14 +244,15 @@ def trapezoidal_rule_solver():
         return integration
 
     # Input section
+    lower_limit = float(data.get("lowerLimit"))
+    upper_limit = float(data.get("upperLimit"))
+    sub_interval = int(data.get("subIntervals"))
 
-    lower_limit = float(input(" Enter lower limit of integration : "))
-    upper_limit = float(input(" Enter upper limit of integration : "))
-    sub_interval = int(input(" Enter number of sub intervals : "))
     # Call trapezoidal () method and get result
     result = trapezoidal(lower_limit, upper_limit, sub_interval)
-    # Print result
-    print(" Integration result by Trapezoidal method is: ", result)
+
+    # return result
+    return jsonify(result)
 
 
 # Simpsons 1/3rd Rule
