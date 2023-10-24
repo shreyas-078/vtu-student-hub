@@ -4,11 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Problem Solvers</title>
-    <link rel="stylesheet" href="../static/css/problem-solvers.css">
+    <title>Calculators</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/problem-solvers.css') }}">
 </head>
 
 <body>
+    <nav id="student-nav">
+        <ul id="student-options-list">
+            <li class="student-options-item"><a href="/">Home</a></li>
+            <li class="student-options-item"><a href="/about-us">About Us</a></li>
+            <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
+            <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
+            <li class="student-options-item"><a href="/related-websites">Resources </a></li>
+        </ul>
+    </nav>
     <h1 id="main-heading">VTU Problem Solving Calculators</h1>
     <main>
         <section id="subjects-selector">

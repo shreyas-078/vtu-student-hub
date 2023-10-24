@@ -10,7 +10,9 @@ body {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 main {
@@ -22,6 +24,7 @@ main {
   width: 100%;
   text-align: center;
   color: rgb(211, 211, 90);
+  font-size: 4rem;
 }
 
 #subjects-list {
@@ -33,6 +36,7 @@ main {
   list-style-type: none;
   gap: 3rem;
   padding: 0;
+  font-size: 2rem;
 }
 
 .subjects-list-item a {
@@ -40,6 +44,103 @@ main {
   color: rgb(211, 211, 90);
 }
 
+.subjects-list-item {
+  position: relative;
+  transition: 0.3s ease all;
+}
+
+.subjects-list-item::before {
+  position: absolute;
+  content: "";
+  background-color: rgb(211, 211, 90);
+  bottom: 0;
+  right: 50%;
+  width: 0%;
+  height: 2px;
+  transition: all 0.3s ease;
+}
+
+.subjects-list-item::after {
+  position: absolute;
+  content: "";
+  background-color: rgb(211, 211, 90);
+  bottom: 0;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  transition: all 0.3s ease;
+}
+
+.subjects-list-item:hover {
+  font-size: 2.5rem;
+}
+
+.subjects-list-item:hover:before {
+  width: 50%;
+}
+
+.subjects-list-item:hover:after {
+  width: 50%;
+}
+
 #page-description {
   color: rgb(211, 211, 90);
+  font-size: 1.5rem;
+}
+
+#student-nav {
+  margin: 1rem 4rem;
+}
+
+#student-options-list {
+  list-style-type: none;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+
+.student-options-item a {
+  padding: 0.7rem;
+  font-size: 2rem;
+  text-decoration: none;
+  color: rgb(211, 211, 90);
+  position: relative;
+}
+
+.student-options-item a::before {
+  box-sizing: border-box;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid rgb(211, 211, 90);
+  border-right: 0;
+  border-bottom: 0;
+  height: 100%;
+  width: 100%;
+  transition: 0.5s ease all;
+}
+
+.student-options-item a::after {
+  box-sizing: border-box;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 2px solid rgb(211, 211, 90);
+  border-left: 0;
+  border-top: 0;
+  height: 100%;
+  width: 100%;
+  transition: 0.3s ease all;
+}
+
+.student-options-item a:hover:after,
+.student-options-item a:hover:before {
+  width: 20%;
+  height: 35%;
 }

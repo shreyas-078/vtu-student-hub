@@ -377,12 +377,13 @@ def milne_pc_page():
     return render_template("subjects/math/milne-pc.html")
 
 
+# Render Euler Template
 @app.route("/euler-template")
 def euler_template_page():
     return render_template("subjects/math/euler.html")
 
 
-# Render mod
+# Render modified Euler Template
 @app.route("/mod-euler-template")
 def mod_euler_template_page():
     return render_template("subjects/math/mod-euler.html")
