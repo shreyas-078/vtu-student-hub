@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interpolation Solver</title>
+  <script src="{{ url_for('static', filename='js/subjects/math/inter-.js') }}" defer></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/inter-.css') }}">
+</head>
+
+<body>
+  <h1 class="interpolation--heading">Interpolation Solver</h1>
+  <section class="interpolation">
+    <div class="inter-num-data-points">
+      <label for="inter-num-data-points">Enter Number of Data Points</label>
+      <input type="number" id="inter-num-data-points">
+    </div>
+    <button type="button" id="btn-inter-apply-data-points">Apply</button>
+    <div class="inter-data-points">
+    </div>
+    <div class="point-to-interpolate">
+      <label for="pt-inter">Enter the Point to interpolate at</label>
+      <input type="number" id="pt-inter">
+    </div>
+    <div class="button-controls">
+      <button type="button" class="btn-calculate-inter">Calculate</button>
+    </div>
+  </section>
+  <button class="btn-reset" type="button">RESET</button>
+</body>
+
+</html>
