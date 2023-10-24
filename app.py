@@ -319,6 +319,29 @@ def simpson_3_8_rule_solver():
     return jsonify(result)
 
 
+@app.route("/lagrange-calci", methods=["POST"])
+def lagrange_solver():
+    data = request.get_json()
+    n = int(data.get("n"))
+    x_str = list(data.get("x"))
+    x = [float(i) for i in x_str]
+    y_str = list(data.get("y"))
+    y = [float(i) for i in y_str]
+    sum = 0
+
+    a = float(data.get("a"))
+    for i in range(n):
+        u = 1
+        l = 1
+        for j in range(n):
+            if abs(i - j) >= 0.0001:
+                u = u * (a - x[j])
+                l = l * (x[i] - x[j])
+        sum = sum + (u / l) * y[i]
+
+    return jsonify(a, sum)
+
+
 # Home Route for Homepage
 @app.route("/")
 def home():

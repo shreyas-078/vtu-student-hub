@@ -5,10 +5,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lagrange Interpolation Solver</title>
+  <script src="{{ url_for('static', filename='js/subjects/math/lagrange.js') }}" defer></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/lagrange.css') }}">
 </head>
 
 <body>
-
+  <h1 class="lagrange-heading">Lagrange Interpolation Solver</h1>
+  <div id="lagrange-num-data-points">
+    <label for="num-data-pts-input">Enter Number of Data Points</label>
+    <input type="text" id="num-data-pts-input" placeholder="5">
+  </div>
+  <button id="apply-num-data-pts" type="button">Apply</button>
+  <section class="lagrange-main invisible">
+    <div class="data-pts"></div>
+    <button class="calculate-btn">Calculate</button>
+  </section>
+  <button class="reset-btn" type="button">Reset</button>
+  <div class="ans-para">
+    <p class="ans-text"></p>
+  </div>
 </body>
 
 </html>
