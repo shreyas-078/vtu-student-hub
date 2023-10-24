@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simpson's 3/8th Rule Solver</title>
+  <script src="{{ url_for('static', filename='js/subjects/math/simpson-3-8.js') }}" defer></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/simpson-3-8.css') }}">
+</head>
+
+<body>
+  <h1 id="simpson-3-8-heading">Trapezoidal Rule Solver</h1>
+  <div class="s38-function">
+    <label for="function">Enter the function:</label>
+    <input type="text" id="function">
+  </div>
+  <div class="s38-lower-limit">
+    <label for="lower-limit">Enter Lower Limit of Integration : </label>
+    <input type="text" id="lower-limit">
+  </div>
+  <div class="s38-upper-limit-value">
+    <label for="upper-limit-value">Enter Upper Limit of Integration : </label>
+    <input type="text" id="upper-limit-value">
+  </div>
+  <div class="s38-sub-intervals">
+    <label for="sub-intervals">Enter Number of Sub-Intervals:</label>
+    <input type="text" id="sub-intervals">
+  </div>
+  <div class="control-buttons">
+    <button type="button" class="calculate-btn">Calculate</button>
+    <button type="button" class="reset-btn">Reset</button>
+  </div>
+  <div class="ans-para">
+    <p class="ans-text"></p>
+  </div>
+</body>
+
+</html>
