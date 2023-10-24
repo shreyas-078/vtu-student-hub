@@ -34,13 +34,9 @@ applyInterpolationDataPointsBtn.addEventListener("click", () => {
 });
 
 resetBtn.addEventListener("click", () => {
-  document.querySelector(".extrapolation").classList.add("invisible");
-  document.querySelector(".interpolation").classList.add("invisible");
-  document.querySelector(".extra-data-points").innerHTML = "";
   document.querySelector(".inter-data-points").innerHTML = "";
-  document.querySelector(".ip-ep-select").value = "";
   document.getElementById("inter-num-data-points").value = "";
-  document.getElementById("extra-num-data-points").value = "";
+  document.getElementById("pt-inter").value = "";
 });
 
 calculateInterpolationBtn.addEventListener("click", () => {

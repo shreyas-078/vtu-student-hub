@@ -127,28 +127,24 @@ def mod_euler():
 # INTERPOLATION
 @app.route("/interpolation-solver", methods=["POST"])
 def interpolation_solver():
-    n = int(input("Enter number of data points : "))
+    data = request.get_json()
+    n = int(data.get("numDataPts"))
+
     x = zeros((n))
     y = zeros((n, n))
+
+    x_str = list(data.get("x"))
+    y_str = list(data.get("y"))
+
     # Reading data points
-    print("Enter data for x and y: ")
     for i in range(n):
-        x[i] = float(input("x[" + str(i) + "]= "))
-        y[i][0] = float(input("y[" + str(i) + "]= "))
+        x[i] = float(x_str[i])
+        y[i][0] = float(y_str[i][0])
 
     # Generating forward difference table
     for i in range(1, n):
         for j in range(0, n - i):
             y[j][i] = y[j + 1][i - 1] - y[j][i - 1]
-
-    print("\n FORWARD DIFFERENCE TABLE \n")
-
-    for i in range(0, n):
-        print("%0.2f " % (x[i]), end="")
-        for j in range(0, n - i):
-            print("\t\t%0.2f " % (y[i][j]), end="")
-        print()
-    # Obtaining the polynomial
 
     t = symbols("t")
     f = []
@@ -161,16 +157,11 @@ def interpolation_solver():
     for i in range(n - 1):
         poly = poly + y[0][i + 1] * f[i]
     simp_poly = simplify(poly)
-    print("\n THE INTERPOLATING POLYNOMIAL IS \n")
-    pprint(simp_poly)
 
-    # If you want to interpolate at some point the next session will help
-    inter = input("Do you want to interpolate at a point (y/n)? ")  # Y
-    if inter == "y":
-        a = float(input("enter the point "))  # 2
-        interpol = lambdify(t, simp_poly)
-        result = interpol(a)
-        print("\ nThe value of the function at ", a, "is\n", result)
+    a = float(data.get("ptInter"))
+    interpol = lambdify(t, simp_poly)
+    result = interpol(a)
+    return jsonify(a, result)
 
 
 # NEWTON-RAPHSON
@@ -265,19 +256,19 @@ def simpson_1_3_rule_solver():
 
     # Definition of the function to integrate
     def my_func(x):
-        return eval(func)
+        return eval(func, {"x": x})
 
     # Function to implement the Simpson 's one - third rule
     def simpson13(x0, xn, n):
         h = (xn - x0) / n  # calculating step size
         # Finding sum
         integration = my_func(x0) + my_func(xn)
-        k = x0
+        k = x0 + h
         for i in range(1, n):
             if i % 2 == 0:
-                integration = integration + 4 * my_func(k)
+                integration += 2 * my_func(k)
             else:
-                integration = integration + 2 * my_func(k)
+                integration += 4 * my_func(k)
             k += h
 
         # Finding final integration value
@@ -296,26 +287,29 @@ def simpson_1_3_rule_solver():
 @app.route("/simpson-3-8-calci", methods=["POST"])
 def simpson_3_8_rule_solver():
     data = request.get_json()
-    func = data.get("F")
 
-    def f(some):
-        return eval(func, {"x": some})
+    # Simpson’s (3/8)th rule
+    def my_func(x):
+        return 1 / (1 + x**2)
 
-    def simpsons_3_8_rule(f, a, b, n):
-        h = (b - a) / n
-        s = f(a) + f(b)
-        for i in range(1, n, 3):
-            s += 3 * f(a + i * h)
-        for i in range(3, n - 1, 3):
-            s += 3 * f(a + i * h)
-        for i in range(2, n - 2, 3):
-            s += 2 * f(a + i * h)
-        return s * 3 * h / 8
+    def simpson38(x0, xn, n):
+        h = (xn - x0) / n  # Calculating step size
+        integration = my_func(x0) + my_func(xn)
+        k = x0 + h
+        for i in range(1, n):
+            if i % 3 == 0:
+                integration = integration + 2 * my_func(k)
+            else:
+                integration = integration + 3 * my_func(k)
+            k += h
+        integration = integration * 3 * h * (1 / 8)
+        return integration
 
     lower_limit = float(data.get("lowerLimit"))
     upper_limit = float(data.get("upperLimit"))
     sub_intervals = int(data.get("subIntervals"))
-    result = simpsons_3_8_rule(f, lower_limit, upper_limit, sub_intervals)
+
+    result = simpson38(lower_limit, upper_limit, sub_intervals)
     return jsonify(result)
 
 
@@ -413,15 +407,9 @@ def regula_falsi_template():
 
 
 # Render the Interpolation/Extrapolation Page
-@app.route("/inter-extrapolation-template")
-def inter_extrapolation_template():
-    return render_template("subjects/math/inter-extrapolation.html")
-
-
-# Render the divided difference page
-@app.route("/dd-solver-template")
-def dd_solver_template():
-    return render_template("subjects/math/div-diff.html")
+@app.route("/interpolation-template")
+def inter_template():
+    return render_template("subjects/math/interpolation.html")
 
 
 # Render the Trapezoidal Rule Page

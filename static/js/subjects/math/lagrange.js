@@ -1,9 +1,6 @@
 const applyNumPointsButton = document.querySelector("#apply-num-data-pts");
 const calculateButton = document.querySelector(".calculate-btn");
 
-let x = [];
-let y = [];
-
 let globalNumDataPts = 0;
 
 applyNumPointsButton.addEventListener("click", () => {
@@ -33,6 +30,8 @@ applyNumPointsButton.addEventListener("click", () => {
 });
 
 calculateButton.addEventListener("click", () => {
+  let x = [];
+  let y = [];
   for (let i = 0; i < globalNumDataPts; i++) {
     x.push(document.querySelector(`.x${i}-input`).value);
     y.push(document.querySelector(`.y${i}-input`).value);
