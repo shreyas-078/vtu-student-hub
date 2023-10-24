@@ -258,7 +258,7 @@ def trapezoidal_rule_solver():
 
 
 # Simpsons 1/3rd Rule
-@app.route("/simpson-1-3-calci")
+@app.route("/simpson-1-3-calci", methods=["POST"])
 def simpson_1_3_rule_solver():
     data = request.get_json()
     func = data.get("F")
@@ -285,22 +285,21 @@ def simpson_1_3_rule_solver():
         return integration
         # Input section
 
-    lower_limit = float(input(" Enter lower limit of integration : "))
-    upper_limit = float(input(" Enter upper limit of integration : "))
-    sub_intervals = int(input(" Enter number of sub intervals : "))
-    # Call simpson13 () method and get result
+    lower_limit = float(data.get("lowerLimit"))
+    upper_limit = float(data.get("upperLimit"))
+    sub_intervals = int(data.get("subIntervals"))
     result = simpson13(lower_limit, upper_limit, sub_intervals)
-    print(" Integration result by Simpson 's 1/3 method is: %0.6f" % (result))
+    return jsonify(result)
 
 
 # Simpsons_3_8_rule
-@app.route("/simpson-3-8-calci")
+@app.route("/simpson-3-8-calci", methods=["POST"])
 def simpson_3_8_rule_solver():
     data = request.get_json()
     func = data.get("F")
 
-    def f(x):
-        eval(func)  # function here
+    def f(some):
+        return eval(func, {"x": some})
 
     def simpsons_3_8_rule(f, a, b, n):
         h = (b - a) / n
@@ -313,11 +312,11 @@ def simpson_3_8_rule_solver():
             s += 2 * f(a + i * h)
         return s * 3 * h / 8
 
-    lower_limit = float(input(" Enter lower limit of integration : "))
-    upper_limit = float(input(" Enter upper limit of integration : "))
-    sub_intervals = int(input(" Enter number of sub intervals : "))
+    lower_limit = float(data.get("lowerLimit"))
+    upper_limit = float(data.get("upperLimit"))
+    sub_intervals = int(data.get("subIntervals"))
     result = simpsons_3_8_rule(f, lower_limit, upper_limit, sub_intervals)
-    print("%3.5f " % result)
+    return jsonify(result)
 
 
 # Home Route for Homepage
@@ -408,10 +407,16 @@ def trapezoidal_template():
     return render_template("subjects/math/trapezoidal-rule.html")
 
 
-# Render the Simpson's Rule Solvers Template
-@app.route("/simpson-template")
-def simpson_template():
-    return render_template("subjects/math/simpson.html")
+# Render the Simpson's 1/3rd Rule Solver Template
+@app.route("/simpson-1-3-template")
+def simpson_1_3_template():
+    return render_template("subjects/math/simpson-1-3.html")
+
+
+# Render the Simpson's 3/8th Rule Solver Template
+@app.route("/simpson-3-8-template")
+def simpson_3_8_template():
+    return render_template("subjects/math/simpson-3-8.html")
 
 
 # Render Lagrange Interpolation Page

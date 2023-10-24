@@ -9,6 +9,9 @@ const applyExtrapolationPointsBtn = document.getElementById(
   "btn-extra-apply-data-points"
 );
 const resetBtn = document.querySelector(".btn-reset");
+const calculateInterpolationBtn = document.querySelector(
+  ".btn-calculate-inter"
+);
 
 chooseButton.addEventListener("click", () => {
   const selection = document.querySelector(".ip-ep-select");
@@ -76,3 +79,5 @@ resetBtn.addEventListener("click", () => {
   document.getElementById("inter-num-data-points").value = "";
   document.getElementById("extra-num-data-points").value = "";
 });
+
+calculateInterpolationBtn.addEventListener("click", () => {});
