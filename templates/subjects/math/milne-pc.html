@@ -10,54 +10,64 @@
 </head>
 
 <body>
+    <nav id="student-nav">
+        <ul id="student-options-list">
+            <li class="student-options-item"><a href="/">Home</a></li>
+            <li class="student-options-item"><a href="/about-us">About Us</a></li>
+            <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
+            <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
+            <li class="student-options-item"><a href="/resources">Resources </a></li>
+        </ul>
+    </nav>
     <section id="milne-pc-solver">
-        <p class="heading" id="milne-pc-heading">Milne's Predictor Corrector Method Solver</p>
-        <div id="milne-pc-function">
-            <label for="milne-pc-function-input">Input Function</label>
-            <input type="text" id="milne-pc-function-input" placeholder="x**2 + y**2">
-        </div>
-        <div id="milne-pc-x0">
-            <label for="milne-pc-x0-input">Enter X0</label>
-            <input type="number" id="milne-pc-x0-input">
-        </div>
-        <div id="milne-pc-y0">
-            <label for="milne-pc-y0-input">Input Y0</label>
-            <input type="number" id="milne-pc-y0-input">
-        </div>
-        <div id="milne-pc-x1">
-            <label for="milne-pc-x1-input">Enter X1</label>
-            <input type="number" id="milne-pc-x1-input">
-        </div>
-        <div id="milne-pc-y1">
-            <label for="milne-pc-x1-input">Enter Y1</label>
-            <input type="number" id="milne-pc-y1-input">
-        </div>
-        <div id="milne-pc-x2">
-            <label for="milne-pc-x2-input">Enter X2</label>
-            <input type="number" id="milne-pc-x2-input">
-        </div>
-        <div id="milne-pc-y2">
-            <label for="milne-pc-y2-input">Enter Y2</label>
-            <input type="number" id="milne-pc-y2-input">
-        </div>
-        <div id="milne-pc-x3">
-            <label for="milne-pc-x3-input">Enter X3</label>
-            <input type="number" id="milne-pc-x3-input">
-        </div>
-        <div id="milne-pc-y3">
-            <label for="milne-pc-y3-input">Enter Y3</label>
-            <input type="number" id="milne-pc-y3-input">
-        </div>
-        <div id="milne-pc-buttons-section">
-            <button class="btn btn-milne-pc-answer">Calculate</button>
-            <button class="btn btn-milne-pc-clear">Clear</button>
-        </div>
-        <div id="milne-pc-answer">
-            <p id="milne-pc-helper-text" class="invisible">Please Enter Proper Values.</p>
-            <p id="milne-pc-y4p"></p>
-            <p id="milne-pc-y4c-1"></p>
-            <p id="milne-pc-y4c-2"></p>
-            <p id="milne-pc-y4c-3"></p>
+        <h1 class="heading" id="milne-pc-heading">Milne's Predictor Corrector Method Solver</h1>
+        <div class="container">
+            <div id="milne-pc-function" class="alignment-fix">
+                <label for=" milne-pc-function-input">Input Function:</label>
+                <input type="text" id="milne-pc-function-input" placeholder="x**2 + y**2" class="right-align">
+            </div>
+            <div id=" milne-pc-x0" class="alignment-fix">
+                <label for="milne-pc-x0-input">Enter X(0):</label>
+                <input type="number" id="milne-pc-x0-input" class="right-align">
+            </div>
+            <div id="milne-pc-y0" class="alignment-fix">
+                <label for="milne-pc-y0-input">Input Y(0):</label>
+                <input type="number" id="milne-pc-y0-input" class="right-align">
+            </div>
+            <div id="milne-pc-x1" class="alignment-fix">
+                <label for="milne-pc-x1-input">Enter X(1):</label>
+                <input type="number" id="milne-pc-x1-input" class="right-align">
+            </div>
+            <div id="milne-pc-y1" class="alignment-fix">
+                <label for="milne-pc-x1-input">Enter Y(1):</label>
+                <input type="number" id="milne-pc-y1-input" class="right-align">
+            </div>
+            <div id="milne-pc-x2" class="alignment-fix">
+                <label for="milne-pc-x2-input">Enter X(2):</label>
+                <input type="number" id="milne-pc-x2-input" class="right-align">
+            </div>
+            <div id="milne-pc-y2" class="alignment-fix">
+                <label for="milne-pc-y2-input">Enter Y(2):</label>
+                <input type="number" id="milne-pc-y2-input" class="right-align">
+            </div>
+            <div id="milne-pc-x3" class="alignment-fix">
+                <label for="milne-pc-x3-input">Enter X(3):</label>
+                <input type="number" id="milne-pc-x3-input" class="right-align">
+            </div>
+            <div id="milne-pc-y3" class="alignment-fix">
+                <label for="milne-pc-y3-input">Enter Y(3):</label>
+                <input type="number" id="milne-pc-y3-input" class="right-align">
+            </div>
+            <div id="milne-pc-buttons-section">
+                <button class="btn btn-milne-pc-answer">Calculate</button>
+                <button class="btn btn-milne-pc-reset">Reset</button>
+            </div>
+            <div id="milne-pc-answer">
+                <p id="milne-pc-y4p"></p>
+                <p id="milne-pc-y4c-1"></p>
+                <p id="milne-pc-y4c-2"></p>
+                <p id="milne-pc-y4c-3"></p>
+            </div>
         </div>
     </section>
 

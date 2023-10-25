@@ -6,6 +6,11 @@ calculateButton.addEventListener("click", () => {
   const upperLimit = document.getElementById("upper-limit-value").value;
   const intervals = document.getElementById("sub-intervals").value;
 
+  if (!trapezoidalFunc || !lowerLimit || !upperLimit || !intervals) {
+    alert("Please enter all values before calculating");
+    return;
+  }
+
   fetch("/trapezoidal-rule-calci", {
     method: "POST",
     headers: {

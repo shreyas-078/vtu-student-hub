@@ -12,24 +12,30 @@ const calculateInterpolationBtn = document.querySelector(
 let globalNumDataPts = 0;
 
 applyInterpolationDataPointsBtn.addEventListener("click", () => {
-  const numDataPts = document.getElementById("inter-num-data-points").value;
-  globalNumDataPts = numDataPts;
+  document.getElementById("pt-inter").value = "";
+  const numDataPts = document.querySelector("#inter-num-data-points").value;
+  if (numDataPts === "") {
+    globalNumDataPts = 0;
+  } else {
+    globalNumDataPts = +numDataPts;
+  }
   document.querySelector(".inter-data-points").innerHTML = "";
-  if (numDataPts > 0 && numDataPts < 10) {
+  if (numDataPts >= 3 && numDataPts < 10) {
+    document.querySelector(".inter-data-points").classList.remove("invisible");
     for (let i = 0; i < numDataPts; i++) {
       document.querySelector(
         ".inter-data-points"
-      ).innerHTML += `<br> <div class = "x${i}">
-      <label for = "x${i}"> Enter X${i}: </label>
-      <input type = "number" class = "x${i}-input">
+      ).innerHTML += `<br> <div class = "x${i} alignment-fix">
+      <label for = "x${i}"> Enter X(${i}): </label>
+      <input type = "number" class = "x-text x${i}-input">
       </div>
-      <div class = "y${i}">
-      <label for = "y${i}"> Enter Y${i}: </label>
-      <input type = "number" class = "y${i}-input">
+      <div class = "y${i} alignment-fix">
+      <label for = "y${i}"> Enter Y(${i}): </label>
+      <input type = "number" class = "y-text y${i}-input">
       </div>`;
     }
   } else {
-    alert("Please Enter A Valid Number of data Points (Range 1-10)");
+    alert("Please Enter A Valid Number of data Points (Range 3-10)");
   }
 });
 
@@ -37,9 +43,29 @@ resetBtn.addEventListener("click", () => {
   document.querySelector(".inter-data-points").innerHTML = "";
   document.getElementById("inter-num-data-points").value = "";
   document.getElementById("pt-inter").value = "";
+  document.querySelector(".inter-data-points").classList.add("invisible");
+  document.querySelector(".ans-text").textContent = "";
 });
 
 calculateInterpolationBtn.addEventListener("click", () => {
+  if (globalNumDataPts === 0) {
+    alert("Please enter your data correctly");
+    return;
+  } else if (globalNumDataPts > 0) {
+    for (let i = 0; i < globalNumDataPts; i++) {
+      if (
+        document.querySelector(`.x${i}-input`).value === "" ||
+        document.querySelector(`.y${i}-input`).value === ""
+      ) {
+        alert("Please enter your data correctly");
+        return;
+      }
+    }
+  }
+  if (document.getElementById("pt-inter").value === "") {
+    alert("Please enter your data correctly");
+    return;
+  }
   let x = [];
   let y = [];
   for (let i = 0; i < globalNumDataPts; i++) {
@@ -55,16 +81,24 @@ calculateInterpolationBtn.addEventListener("click", () => {
     body: JSON.stringify({
       x: x,
       y: y,
-      ptInter: ptToInterpolate,
+      ptInter: +ptToInterpolate,
       numDataPts: globalNumDataPts,
     }),
   })
     .then((response) => {
+      if (response.status === 500) {
+        throw new Error("An Error Occured. You can try using different values");
+      }
       if (response.ok) {
         return response.json();
       }
     })
     .then((data) => {
-      console.log(data);
+      document.querySelector(
+        ".ans-text"
+      ).textContent = `Y(${data[0]}) = ${data[1]}`;
+    })
+    .catch((error) => {
+      alert("An error occured. Try again with different values.");
     });
 });

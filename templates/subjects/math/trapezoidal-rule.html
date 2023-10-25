@@ -10,29 +10,40 @@
 </head>
 
 <body>
+  <nav id="student-nav">
+    <ul id="student-options-list">
+      <li class="student-options-item"><a href="/">Home</a></li>
+      <li class="student-options-item"><a href="/about-us">About Us</a></li>
+      <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
+      <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
+      <li class="student-options-item"><a href="/resources">Resources </a></li>
+    </ul>
+  </nav>
   <h1 id="trapezoidal-rule">Trapezoidal Rule Solver</h1>
-  <div class="tr-function">
-    <label for="function">Enter the function:</label>
-    <input type="text" id="function">
-  </div>
-  <div class="tr-lower-limit">
-    <label for="lower-limit">Enter Lower Limit of Integration : </label>
-    <input type="text" id="lower-limit">
-  </div>
-  <div class="tr-upper-limit-value">
-    <label for="upper-limit-value">Enter Upper Limit of Integration : </label>
-    <input type="text" id="upper-limit-value">
-  </div>
-  <div class="tr-sub-intervals">
-    <label for="sub-intervals">Enter Number of Sub-Intervals:</label>
-    <input type="text" id="sub-intervals">
-  </div>
-  <div class="control-buttons">
-    <button type="button" class="calculate-btn">Calculate</button>
-    <button type="button" class="reset-btn">Reset</button>
-  </div>
-  <div class="ans-para">
-    <p class="ans-text"></p>
+  <div class="container">
+    <div class="tr-function" id="alignment-fix">
+      <label for="function">Enter the function :</label>
+      <input type="text" id="function" class="right-align">
+    </div>
+    <div class="tr-lower-limit" id="alignment-fix">
+      <label for="lower-limit">Enter Lower Limit of Integration : </label>
+      <input type="number" id="lower-limit" class="right-align">
+    </div>
+    <div class="tr-upper-limit-value" id="alignment-fix">
+      <label for="upper-limit-value">Enter Upper Limit of Integration : </label>
+      <input type="number" id="upper-limit-value" class="right-align">
+    </div>
+    <div class="tr-sub-intervals" id="alignment-fix">
+      <label for="sub-intervals">Enter Number of Sub-Intervals :</label>
+      <input type="number" id="sub-intervals" class="right-align">
+    </div>
+    <div class="control-buttons">
+      <button type="button" class="calculate-btn btn">Calculate</button>
+      <button type="button" class="reset-btn btn">Reset</button>
+    </div>
+    <div class="ans-para">
+      <p class="ans-text"></p>
+    </div>
   </div>
 </body>
 

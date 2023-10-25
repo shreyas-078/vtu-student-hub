@@ -1,6 +1,6 @@
 # Imports
 from flask import Flask, render_template, jsonify, request  # Web Server
-from sympy import symbols, diff, exp, lambdify, pprint, simplify  # Math eval
+from sympy import symbols, diff, exp, lambdify, simplify  # Math eval
 from numpy import array, zeros  # Math eval
 import math  # More Math Eval
 
@@ -77,8 +77,13 @@ def euler():
 
     ans = []
 
-    def f(x, y):
-        return eval(func)  # INPUT FUNCTION ADD REGEX
+    try:
+
+        def f(x, y):
+            return eval(func)  # INPUT FUNCTION ADD REGEX
+
+    except Exception as e:
+        return jsonify(["Function Error"]), 400
 
     x0 = float(data.get("X0"))
     y0 = float(data.get("Y0"))
@@ -86,12 +91,15 @@ def euler():
     n = int(data.get("N"))
 
     for i in range(n + 1):
-        y1 = y0 + h * f(x0, y0)
+        try:
+            y1 = y0 + h * f(x0, y0)
+        except Exception as e:
+            return jsonify(["Function Error"]), 400
         x0 = x0 + h
         y0 = y1
         ans.append((round(x0, 2), round(y0, 4)))
 
-    return jsonify(ans)
+    return jsonify(ans), 200
 
 
 # Modified Euler
@@ -151,6 +159,7 @@ def interpolation_solver():
 
     p = (t - x[0]) / (x[1] - x[0])
     f.append(p)
+    poly = 0
     for i in range(1, n - 1):
         f.append(f[i - 1] * (p - i) / (i + 1))
         poly = y[0][0]
@@ -161,7 +170,7 @@ def interpolation_solver():
     a = float(data.get("ptInter"))
     interpol = lambdify(t, simp_poly)
     result = interpol(a)
-    return jsonify(a, result)
+    return jsonify([a, result])
 
 
 # NEWTON-RAPHSON
@@ -289,8 +298,13 @@ def simpson_3_8_rule_solver():
     data = request.get_json()
 
     # Simpson’s (3/8)th rule
-    def my_func(x):
-        return 1 / (1 + x**2)
+    try:
+
+        def my_func(x):
+            return eval(x, {"x": x})
+
+    except Exception as e:
+        return jsonify("Function Error")
 
     def simpson38(x0, xn, n):
         h = (xn - x0) / n  # Calculating step size

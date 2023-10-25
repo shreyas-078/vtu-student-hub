@@ -10,24 +10,36 @@
 </head>
 
 <body>
-  <h1 class="interpolation--heading">Interpolation Solver</h1>
+  <nav id="student-nav">
+    <ul id="student-options-list">
+      <li class="student-options-item"><a href="/">Home</a></li>
+      <li class="student-options-item"><a href="/about-us">About Us</a></li>
+      <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
+      <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
+      <li class="student-options-item"><a href="/resources">Resources </a></li>
+    </ul>
+  </nav>
+  <h1 class="interpolation-heading">Interpolation Solver</h1>
   <section class="interpolation">
     <div class="inter-num-data-points">
       <label for="inter-num-data-points">Enter Number of Data Points</label>
       <input type="number" id="inter-num-data-points">
     </div>
-    <button type="button" id="btn-inter-apply-data-points">Apply</button>
-    <div class="inter-data-points">
+    <button type="button" id="btn-inter-apply-data-points" class="btn">Apply</button>
+    <div class="inter-data-points invisible">
     </div>
     <div class="point-to-interpolate">
       <label for="pt-inter">Enter the Point to interpolate at</label>
       <input type="number" id="pt-inter">
     </div>
     <div class="button-controls">
-      <button type="button" class="btn-calculate-inter">Calculate</button>
+      <button type="button" class="btn btn-calculate-inter">Calculate</button>
     </div>
   </section>
-  <button class="btn-reset" type="button">RESET</button>
+  <button class="btn btn-reset" type="button">RESET</button>
+  <div class="ans-para">
+    <p class="ans-text"></p>
+  </div>
 </body>
 
 </html>
