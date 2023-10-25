@@ -10,29 +10,42 @@
 </head>
 
 <body>
+  <nav id="student-nav">
+    <ul id="student-options-list">
+      <li class="student-options-item"><a href="/">Home</a></li>
+      <li class="student-options-item"><a href="/about-us">About Us</a></li>
+      <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
+      <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
+      <li class="student-options-item"><a href="/resources">Resources </a></li>
+    </ul>
+  </nav>
+
   <h1 id="Regula-Falsi">Regula-Falsi Solver</h1>
-  <div class="rf-function">
-    <label for="function">Enter the function:</label>
-    <input type="text" id="function" placeholder="x ** 2">
-  </div>
-  <div class="rf-a-value">
-    <label for="a-value">Enter value of a : </label>
-    <input type="text" id="a-value">
-  </div>
-  <div class="rf-b-value">
-    <label for="b-value">Enter value of b : </label>
-    <input type="text" id="b-value">
-  </div>
-  <div class="rf-iterations">
-    <label for="iterations">Enter Number of Iterations:</label>
-    <input type="text" id="iterations">
-  </div>
-  <div class="control-buttons">
-    <button type="button" class="calculate-btn">Calculate</button>
-    <button type="button" class="reset-btn">Reset</button>
-  </div>
-  <div class="answer-para">
-    <p class="answer-text"></p>
+  <div class="container">
+    <div class="rf-function" id="alignment-fix">
+      <label for="function">Enter the function:</label>
+      <input type="text" id="function" class="right-align" placeholder="x ** 2">
+    </div>
+    <div class="rf-a-value" id="alignment-fix">
+      <label for="a-value">Enter value of a : </label>
+      <input type="text" id="a-value" class="right-align">
+    </div>
+    <div class="rf-b-value" id="alignment-fix">
+      <label for="b-value">Enter value of b : </label>
+      <input type="text" id="b-value" class="right-align">
+    </div>
+    <div class="rf-iterations" id="alignment-fix">
+      <label for="iterations">Enter Number of Iterations:</label>
+      <input type="text" id="iterations" class="right-align">
+    </div>
+    <div class="control-buttons">
+      <button type="button" class="calculate-btn btn">Calculate</button>
+      <button type="button" class="reset-btn btn">Reset</button>
+    </div>
+    <div class="answer-para">
+      <p class="answer-text">
+      </p>
+    </div>
   </div>
 </body>
 

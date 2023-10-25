@@ -1,4 +1,5 @@
 const calculateButton = document.getElementById("calculate-mod-euler");
+const resetButton = document.getElementById("final-ans");
 
 calculateButton.addEventListener("click", () => {
   const eulerFunction = document.getElementById("function").value;
@@ -6,6 +7,13 @@ calculateButton.addEventListener("click", () => {
   const eulerY0 = document.getElementById("y0").value;
   const eulerN = document.getElementById("n").value;
   const eulerH = document.getElementById("h").value;
+  if (!eulerFunction || !eulerX0 || !eulerY0 || !eulerN || !eulerH) {
+    alert("Please enter all values before calculating");
+    return;
+  }
+  if (eulerN < 0 || eulerH < 0) {
+    alert("Iterations or Step Length cannot be 0");
+  }
   fetch("/mod-euler", {
     method: "POST",
     headers: {
@@ -20,6 +28,9 @@ calculateButton.addEventListener("click", () => {
     }),
   })
     .then((response) => {
+      if (response.status === 500) {
+        throw new Error("Try again");
+      }
       if (response.ok) {
         return response.json();
       }
@@ -34,5 +45,17 @@ calculateButton.addEventListener("click", () => {
       }
       ansPara.innerHTML += `<br> Final Value: <br>
             ${data[data.length - 1]}`;
+    })
+    .catch((error) => {
+      alert("An Error Occured. Try again with different values.");
     });
+});
+
+resetButton.addEventListener("click", () => {
+  document.getElementById("function").value = "";
+  document.getElementById("x0").value = "";
+  document.getElementById("y0").value = "";
+  document.getElementById("n").value = "";
+  document.getElementById("h").value = "";
+  document.querySelector("#final-ans").innerHTML = "";
 });

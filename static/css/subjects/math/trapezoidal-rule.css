@@ -86,8 +86,8 @@ body {
 .right-align {
   font-size: 1.2rem;
   align-self: right;
-  margin-left: 5rem;
-  margin-right: 5rem;
+  margin-left: 1rem;
+  margin-right: 12rem;
 }
 
 label {
@@ -109,6 +109,7 @@ label {
   grid-template-columns: 2fr 3fr;
   grid-template-rows: 1fr;
   width: 55rem;
+  padding-left: 6rem;
 }
 
 .btn {

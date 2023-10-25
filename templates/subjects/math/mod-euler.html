@@ -10,38 +10,48 @@
 </head>
 
 <body>
+    <nav id="student-nav">
+        <ul id="student-options-list">
+            <li class="student-options-item"><a href="/">Home</a></li>
+            <li class="student-options-item"><a href="/about-us">About Us</a></li>
+            <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
+            <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
+            <li class="student-options-item"><a href="/related-websites">Resources</a></li>
+        </ul>
+    </nav>
     <h1 id="mod-euler-heading">Modified Euler's Method Solver</h1>
     <p class="note">NOTE: If 2 Iterations produce the same answer up to 4 decimals, the calculator will return results
         only up
-        to the <br> iteration which produced the same output, regardless of the number of iterations entered</p>
-    <div class="mod-euler-function">
-        <label for="function">Function:</label>
-        <input type="text" name="" id="function" placeholder="x**2 + y**2">
+        to the <br> iteration which produced the same output, regardless of the number of iterations entered.</p>
+    <div class="container">
+        <div class="mod-euler-function alignment-fix">
+            <label for="function">Enter the Function:</label>
+            <input type="text" id="function" placeholder="x**2 + y**2" class="right-align">
+        </div>
+        <div class="mod-euler-x0 alignment-fix">
+            <label for="x0">Enter X(0):</label>
+            <input type="number" id="x0" class="right-align">
+        </div>
+        <div class="mod-euler-y0 alignment-fix">
+            <label for="y0">Enter Y(0) :</label>
+            <input type="number" id="y0" class="right-align">
+        </div>
+        <div class="mod-euler-n alignment-fix">
+            <label for="n">Number of Iterations :</label>
+            <input type="number" id="n" class="right-align">
+        </div>
+        <div class="mod-euler-h alignment-fix">
+            <label for="h">Step (H) :</label>
+            <input type="number" id="h" class="right-align">
+        </div>
+        <div class="buttons">
+            <button id="calculate-mod-euler" class="btn">Calculate</button>
+            <button id="reset-mod-euler" class="btn">Reset</button>
+        </div>
+        <div class="answer-mod-euler">
+            <p id="final-ans"></p>
+        </div>
     </div>
-    <div class="mod-euler-x0">
-        <label for="x0">X0:</label>
-        <input type="number" name="" id="x0">
-    </div>
-    <div class="mod-euler-y0">
-        <label for="y0">Y0:</label>
-        <input type="number" name="" id="y0">
-    </div>
-    <div class="mod-euler-n">
-        <label for="n">Number of Iterations:</label>
-        <input type="number" name="" id="n">
-    </div>
-    <div class="mod-euler-h">
-        <label for="h">Step (H):</label>
-        <input type="number" name="" id="h">
-    </div>
-    <div class="buttons">
-        <button id="calculate-mod-euler">Calculate</button>
-        <button id="reset-mod-euler">Reset</button>
-    </div>
-    <div class="answer-mod-euler">
-        <p id="final-ans"></p>
-    </div>
-
 </body>
 
 </html>

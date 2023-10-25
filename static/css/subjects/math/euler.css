@@ -24,6 +24,12 @@ button {
     cursor: pointer;
 }
 
+label {
+    text-align: right;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+}
+
 #student-nav {
     width: 100%;
     margin: 1rem 4rem;
@@ -95,14 +101,6 @@ button {
     font-size: 2rem;
 }
 
-#function,
-#x0,
-#y0,
-#n,
-#h {
-    font-size: 1.5rem;
-}
-
 .buttons {
     display: flex;
     gap: 1rem;
@@ -138,6 +136,7 @@ button {
 #function,
 #h {
     width: 80%;
+    font-size: 1rem;
 }
 
 .euler-function,
