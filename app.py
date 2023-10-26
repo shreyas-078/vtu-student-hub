@@ -373,9 +373,9 @@ def gpa_calculators():
 
 
 # Route to redirect to math problem solvers page
-@app.route("/math")
+@app.route("/sem2-math")
 def math_page():
-    return render_template("subjects/math/math.html")
+    return render_template("subjects/math/sem2-math.html")
 
 
 # Route to redirect to runge-kutta solver page
