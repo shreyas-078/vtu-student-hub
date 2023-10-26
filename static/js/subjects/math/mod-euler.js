@@ -11,8 +11,8 @@ calculateButton.addEventListener("click", () => {
     alert("Please enter all values before calculating");
     return;
   }
-  if (eulerN < 0 || eulerH < 0) {
-    alert("Iterations or Step Length cannot be 0");
+  if (eulerN <= 0 || eulerH <= 0) {
+    alert("Iterations or Step Length cannot be 0 or negative");
   }
   fetch("/mod-euler", {
     method: "POST",

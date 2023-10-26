@@ -16,7 +16,9 @@ calculateButton.addEventListener("click", () => {
     return;
   }
   if (eulerN < 1 || eulerH < 0.1) {
-    alert("Cannot take negative step length or negative number of iterations");
+    alert(
+      "Cannot take negative/0 step length or negative/0 number of iterations"
+    );
     return;
   }
   fetch("/euler", {

@@ -12,8 +12,8 @@ calculateButton.addEventListener("click", () => {
     return;
   }
 
-  if (intervals < 0) {
-    alert("Number of intervals cannot be negative");
+  if (intervals <= 0) {
+    alert("Number of intervals cannot be negative or 0");
     return;
   }
 

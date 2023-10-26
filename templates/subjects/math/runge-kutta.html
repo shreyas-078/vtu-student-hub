@@ -10,36 +10,44 @@
 </head>
 
 <body>
+    <nav id="student-nav">
+        <ul id="student-options-list">
+            <li class="student-options-item"><a href="/">Home</a></li>
+            <li class="student-options-item"><a href="/about-us">About Us</a></li>
+            <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
+            <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
+            <li class="student-options-item"><a href="/related-websites">Resources</a></li>
+        </ul>
+    </nav>
+    <h1 class="heading" id="rk-heading">Runge Kutta Solver</h1>
     <section id="runge-kutta-solver">
-        <p class="heading" id="rk-heading">Runge Kutta Solver</p>
-        <div id="rk-function">
-            <label for="rk-function-input">Input Function</label>
-            <input type="text" id="rk-function-input" placeholder="x**2 + y**2">
+        <div id="rk-function" class="alignment-fix">
+            <label for="rk-function-input">Enter Function:</label>
+            <input type="text" id="rk-function-input" placeholder="x**2 + y**2" class="right-align">
         </div>
-        <div id="rk-x0">
-            <label for="rk-x0-input">Enter X0</label>
-            <input type="number" id="rk-x0-input">
+        <div id="rk-x0" class="alignment-fix">
+            <label for="rk-x0-input">Enter X0:</label>
+            <input type="number" id="rk-x0-input" class="right-align">
         </div>
-        <div id="rk-y0">
-            <label for="rk-y0-input">Input Y0</label>
-            <input type="number" id="rk-y0-input">
+        <div id="rk-y0" class="alignment-fix">
+            <label for="rk-y0-input">Enter Y0:</label>
+            <input type="number" id="rk-y0-input" class="right-align">
         </div>
-        <div id="rk-h">
-            <label for="rk-h-input">Enter H</label>
-            <input type="number" id="rk-h-input">
+        <div id="rk-h" class="alignment-fix">
+            <label for="rk-h-input">Enter H:</label>
+            <input type="number" id="rk-h-input" class="right-align">
         </div>
         <div id="rk-buttons-section">
             <button class="btn btn-rk-answer">Calculate</button>
-            <button class="btn btn-rk-clear">Clear</button>
+            <button class="btn btn-rk-reset">Reset</button>
         </div>
         <div id="rk-answer">
-            <p id="rk-helper-text" class="invisible">Please Enter Proper Values.</p>
-            <p id="rk-k1"></p>
-            <p id="rk-k2"></p>
-            <p id="rk-k3"></p>
-            <p id="rk-k4"></p>
-            <p id="rk-x1"></p>
-            <p id="rk-y1"></p>
+            <p id="rk-k1" class="no-m"></p>
+            <p id="rk-k2" class="no-m"></p>
+            <p id="rk-k3" class="no-m"></p>
+            <p id="rk-k4" class="no-m"></p>
+            <p id="rk-x1" class="no-m"></p>
+            <p id="rk-y1" class="no-m"></p>
         </div>
     </section>
 </body>

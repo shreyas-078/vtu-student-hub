@@ -15,7 +15,7 @@ def milne_pc():
     answer = []
     data = request.get_json()
     func_exp = data.get("f")
-    func = lambda x, y: eval(func_exp)  # SERVER BREAKER, FIX BY ADDING REGEX IN JS
+    func = lambda x, y: eval(func_exp)
     x = [
         float(data.get("x0")),
         float(data.get("x1")),
@@ -55,9 +55,7 @@ def runge_kutta():
     data = request.get_json()
     func = data.get("f")
     x0 = float(data.get("x0"))
-    f = lambda x, y: eval(
-        func
-    )  # IMPORTANT: ADD REGEX FOR FUNC SO AS TO AVOID SERVER NUKING COMMANDS
+    f = lambda x, y: eval(func)
     y0 = float(data.get("y0"))
     h = float(data.get("h"))
     x1 = x0 + h
@@ -80,7 +78,7 @@ def euler():
     try:
 
         def f(x, y):
-            return eval(func)  # INPUT FUNCTION ADD REGEX
+            return eval(func)
 
     except Exception as e:
         return jsonify(["Function Error"]), 400
@@ -108,7 +106,7 @@ def mod_euler():
     data = request.get_json()
     func = data.get("F")
 
-    f = lambda x, y: eval(func)  # INPUT FUNCTION ADD REGEX
+    f = lambda x, y: eval(func)
     x0 = float(data.get("X0"))
     y0 = float(data.get("Y0"))
     h = float(data.get("H"))
@@ -182,7 +180,7 @@ def newton_raphson_solver():
     x = symbols("x")
     func = data.get("nrFunction")
 
-    g = eval(func)  # ADD REGEX OR SOMETHING
+    g = eval(func)
     f = lambdify(x, g)
     dg = diff(g)
     df = lambdify(x, dg)
@@ -296,12 +294,13 @@ def simpson_1_3_rule_solver():
 @app.route("/simpson-3-8-calci", methods=["POST"])
 def simpson_3_8_rule_solver():
     data = request.get_json()
+    func = data.get("F")
 
     # Simpson’s (3/8)th rule
     try:
 
         def my_func(x):
-            return eval(x, {"x": x})
+            return eval(func, {"x": x})
 
     except Exception as e:
         return jsonify("Function Error")
@@ -449,6 +448,11 @@ def simpson_3_8_template():
 @app.route("/lagrange-template")
 def lagrange_template():
     return render_template("subjects/math/lagrange.html")
+
+
+@app.route("/resources")
+def resources_template():
+    return render_template("resources.html")
 
 
 # Start the flask app
