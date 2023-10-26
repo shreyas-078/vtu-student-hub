@@ -1,11 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap");
 
+:root {
+  --color-bg: rgb(41, 41, 89);
+  --color-text: rgb(211, 211, 90);
+}
+
 * {
   font-family: "Gabarito", cursive;
 }
 
 body {
-  background-color: rgb(41, 41, 89);
+  background-color: var(--color-bg);
   margin: 0;
   box-sizing: border-box;
   width: 100%;
@@ -23,7 +28,7 @@ main {
 #main-heading {
   width: 100%;
   text-align: center;
-  color: rgb(211, 211, 90);
+  color: var(--color-text);
   font-size: 4rem;
   margin-bottom: 0;
 }
@@ -43,7 +48,7 @@ main {
 
 .subjects-list-item a {
   text-decoration: none;
-  color: rgb(211, 211, 90);
+  color: var(--color-text);
 }
 
 .subjects-list-item {
@@ -54,7 +59,7 @@ main {
 .subjects-list-item::before {
   position: absolute;
   content: "";
-  background-color: rgb(211, 211, 90);
+  background-color: var(--color-text);
   bottom: 0;
   right: 50%;
   width: 0%;
@@ -65,7 +70,7 @@ main {
 .subjects-list-item::after {
   position: absolute;
   content: "";
-  background-color: rgb(211, 211, 90);
+  background-color: var(--color-bg);
   bottom: 0;
   left: 50%;
   width: 0%;
@@ -86,7 +91,7 @@ main {
 }
 
 #page-description {
-  color: rgb(211, 211, 90);
+  color: var(--color-text);
   font-size: 1.5rem;
 }
 
@@ -109,7 +114,7 @@ main {
   padding: 0.7rem;
   font-size: 2rem;
   text-decoration: none;
-  color: rgb(211, 211, 90);
+  color: var(--color-text);
   position: relative;
 }
 
@@ -119,7 +124,7 @@ main {
   position: absolute;
   top: 0;
   left: 0;
-  border: 2px solid rgb(211, 211, 90);
+  border: 2px solid var(--color-text);
   border-right: 0;
   border-bottom: 0;
   height: 100%;
@@ -133,7 +138,7 @@ main {
   position: absolute;
   bottom: 0;
   right: 0;
-  border: 2px solid rgb(211, 211, 90);
+  border: 2px solid var(--color-text);
   border-left: 0;
   border-top: 0;
   height: 100%;
@@ -145,4 +150,19 @@ main {
 .student-options-item a:hover:before {
   width: 20%;
   height: 35%;
+}
+
+.resources-list {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.resources-list a {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: var(--color-text);
 }

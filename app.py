@@ -450,6 +450,7 @@ def lagrange_template():
     return render_template("subjects/math/lagrange.html")
 
 
+# External Resources/Links Page
 @app.route("/resources")
 def resources_template():
     return render_template("resources.html")
