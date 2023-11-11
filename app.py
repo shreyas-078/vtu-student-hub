@@ -456,6 +456,12 @@ def resources_template():
     return render_template("resources.html")
 
 
+# Sem 1 Math Problems Page
+@app.route("/sem1-math")
+def sem1_math_template():
+    return render_template("subjects/math/sem1-math.html")
+
+
 # Start the flask app
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)

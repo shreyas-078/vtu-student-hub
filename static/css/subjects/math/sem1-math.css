@@ -11,6 +11,7 @@
 
 body {
   background-color: var(--color-bg);
+  color: var(--color-text);
   margin: 0;
   box-sizing: border-box;
   width: 100%;
@@ -18,4 +19,64 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+#student-nav {
+  width: 100%;
+  margin: 1rem 4rem;
+}
+
+#student-options-list {
+  list-style-type: none;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+
+.student-options-item a {
+  padding: 0.7rem;
+  font-size: 2rem;
+  text-decoration: none;
+  color: rgb(211, 211, 90);
+  position: relative;
+}
+
+.student-options-item a::before {
+  box-sizing: border-box;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid rgb(211, 211, 90);
+  border-right: 0;
+  border-bottom: 0;
+  height: 100%;
+  width: 100%;
+  transition: 0.5s ease all;
+}
+
+.student-options-item a::after {
+  box-sizing: border-box;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 2px solid rgb(211, 211, 90);
+  border-left: 0;
+  border-top: 0;
+  height: 100%;
+  width: 100%;
+  transition: 0.3s ease all;
+}
+
+.student-options-item a:hover:after,
+.student-options-item a:hover:before {
+  width: 20%;
+  height: 35%;
 }
