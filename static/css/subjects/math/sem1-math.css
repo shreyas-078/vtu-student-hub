@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+  --color-bg: rgb(41, 41, 89);
+  --color-text: rgb(211, 211, 90);
+}
+
+* {
+  font-family: "Gabarito", cursive;
+}
+
+body {
+  background-color: var(--color-bg);
+  margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
