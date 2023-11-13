@@ -30,10 +30,6 @@ body {
     cursor: pointer;
 }
 
-#student-nav {
-    margin: 1rem 4rem;
-}
-
 #student-options-list {
     list-style-type: none;
     width: 100%;
@@ -136,4 +132,55 @@ body {
 
 .invisible {
     display: none;
+}
+
+@media (max-width: 1111px) {
+
+    #student-options-list {
+        list-style-type: none;
+        width: 100%;
+        height: 6rem;
+        padding: 0;
+
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+
+    .student-options-item a {
+        padding: 0.7rem;
+        font-size: 1rem;
+        text-decoration: none;
+        color: rgb(211, 211, 90);
+        position: relative;
+    }
+
+    #milne-pc-heading {
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    input {
+        width: 10rem;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+    }
+
+    #milne-pc-function {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    p {
+        text-align: center;
+    }
 }

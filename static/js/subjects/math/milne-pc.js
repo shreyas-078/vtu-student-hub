@@ -76,4 +76,8 @@ mpcResetButton.addEventListener("click", () => {
   document.querySelector("#milne-pc-y2-input").value = "";
   document.querySelector("#milne-pc-x3-input").value = "";
   document.querySelector("#milne-pc-y3-input").value = "";
+  document.querySelector("#milne-pc-y4p").textContent = "";
+  document.querySelector("#milne-pc-y4c-1").textContent = "";
+  document.querySelector("#milne-pc-y4c-2").textContent = "";
+  document.querySelector("#milne-pc-y4c-3").textContent = "";
 });

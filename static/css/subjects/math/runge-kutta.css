@@ -134,3 +134,45 @@ label {
 .no-m {
     margin-bottom: 0;
 }
+
+@media (max-width: 1111px) {
+
+    #student-options-list {
+        list-style-type: none;
+        width: 100%;
+        height: 6rem;
+        padding: 0;
+
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+
+    .student-options-item a {
+        padding: 0.7rem;
+        font-size: 1rem;
+        text-decoration: none;
+        color: rgb(211, 211, 90);
+        position: relative;
+    }
+
+    #rk-heading {
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    input {
+        width: 9rem;
+    }
+
+    .alignment-fix {
+        padding-left: 10rem;
+    }
+
+    body {
+        margin: auto;
+    }
+}
