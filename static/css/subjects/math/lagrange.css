@@ -116,6 +116,10 @@ button {
 
 .target-x {
   font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .target-x-input {
@@ -153,6 +157,13 @@ button {
   margin-top: 0.7rem;
 }
 
+#lagrange-num-data-points {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .ans-text {
   margin-top: 13px;
   font-size: 3rem;
@@ -160,4 +171,48 @@ button {
 
 .invisible {
   display: none;
+}
+
+@media (max-width: 999px) {
+  #student-nav {
+    width: 100%;
+  }
+
+  #student-options-list {
+    list-style-type: none;
+    width: 100%;
+    height: 6rem;
+    padding: 0;
+
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+
+  .student-options-item a {
+    padding: 0.7rem;
+    font-size: 1rem;
+    text-decoration: none;
+    color: rgb(211, 211, 90);
+    position: relative;
+  }
+
+  .lagrange-heading {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .x-text,
+  .y-text {
+    width: 8rem;
+    align-self: center;
+    justify-self: center;
+  }
+
+  label {
+    font-size: 1.1rem;
+  }
 }

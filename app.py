@@ -2,7 +2,7 @@
 from flask import Flask, render_template, jsonify, request  # Web Server
 from sympy import symbols, diff, exp, lambdify, simplify  # Math eval
 from numpy import array, zeros  # Math eval
-import math  # More Math Eval
+from math import log  # More Math Eval
 
 
 # Initaiate Flask Application
