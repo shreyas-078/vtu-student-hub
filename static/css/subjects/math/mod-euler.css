@@ -133,6 +133,33 @@ label {
     border: 2px solid var(--color-bg);
 }
 
+.buttons p:hover {
+    cursor: pointer;
+}
+
+.buttons p {
+    position: relative;
+    text-align: center;
+}
+
+.buttons p::after {
+    content: "Normally, you can use (**) for powers. Eg: 2 raised to power 3 would be represented as 2**3 in the function box. You can use exp() to substitute for e in your expressions. For exmaple, e raised to power x would be represnted as exp(x). Enforce parantheses where needed in order to prevent unwanted BODMAS evaluation.";
+    width: 500px;
+    height: 150px;
+    border: 2px solid var(--color-text);
+    position: absolute;
+    top: -180px;
+    left: -300px;
+    opacity: 0%;
+    background-color: var(--color-bg);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.buttons p:hover::after {
+    opacity: 100%;
+}
+
 @media (max-width: 999px) {
     #student-nav {
         width: 100%;
@@ -184,5 +211,12 @@ label {
 
     .right-align {
         width: 9rem;
+    }
+
+    .buttons p::after {
+        font-size: 0.8rem;
+        width: 300px;
+        height: 110px;
+        left: -90px;
     }
 }
