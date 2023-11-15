@@ -170,8 +170,19 @@ label {
     }
 
     label {
-        font-size: 1.1rem;
+        font-size: 0.9rem;
+        text-align: center;
     }
 
+    .alignment-fix {
+        padding-left: 9rem;
+    }
 
+    h1 {
+        margin-top: 0;
+    }
+
+    .right-align {
+        width: 9rem;
+    }
 }
