@@ -147,7 +147,7 @@ body {
     position: absolute;
     top: -180px;
     left: -300px;
-    opacity: 0%;
+    display: none;
     background-color: var(--color-bg);
     border-radius: 5px;
     padding: 10px;
@@ -155,7 +155,7 @@ body {
 }
 
 .buttons p:hover::after {
-    opacity: 100%;
+    display: block;
 }
 
 .invisible {
