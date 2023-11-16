@@ -8,4 +8,6 @@ This will also help juniors moving forward because when we were in the semester 
 
 For educational purposes only, we DO NOT CONDONE cheating using our website.
 
+THE NEXT BIG UPDATE: Will be migrating the entire application to React Router and Python instead of Vanilla Javascript
+
 Contributors: Shreyas Salankimatt, Ashray Chaitanya
