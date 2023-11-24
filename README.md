@@ -12,4 +12,4 @@ THE NEXT BIG UPDATE: Will be migrating the entire application to React Router an
 
 Contributors: Shreyas Salankimatt, Ashray Chaitanya
 
-Website: www.vtuhub.pythonanywhere.com
+Website: https://vtuhub.pythonanywhere.com/
