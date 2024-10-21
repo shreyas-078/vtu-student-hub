@@ -49,6 +49,7 @@ calculateButton.addEventListener("click", () => {
     })
     .then((data) => {
       const ansPara = document.getElementById("final-ans");
+      ansPara.innerHTML = "";
       for (let i = 0; i < eulerN; i++) {
         ansPara.innerHTML += "<br>" + `Y(${data[i][0]}) = ${data[i][1]}`;
       }
