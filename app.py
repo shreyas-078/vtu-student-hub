@@ -123,6 +123,20 @@ def lagrange(d):
 
 # --------------------------------------------------------------------- pages
 
+NAV_SECTIONS = {
+    "/": "home",
+    "/about-us": "about",
+    "/gpa-calculators": "gpa",
+    "/resources": "resources",
+}
+
+
+@app.context_processor
+def inject_nav_section():
+    """Tell the shared nav which top-level link is the current page."""
+    return {"nav_section": NAV_SECTIONS.get(request.path, "solvers")}
+
+
 PAGES = {
     "/": "index.html",
     "/about-us": "about-us.html",

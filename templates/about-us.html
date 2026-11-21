@@ -5,20 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us </title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/about-us.css')}}">
   <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.png')}}" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
 </head>
 
 <body>
-  <nav id="student-nav">
-    <ul id="student-options-list">
-      <li class="student-options-item"><a href="/">Home</a></li>
-      <li class="student-options-item"><a href="/about-us">About Us</a></li>
-      <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
-      <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
-      <li class="student-options-item"><a href="/resources">Resources</a></li>
-    </ul>
-  </nav>
+    {% include "_nav.html" %}
   <div class="about-us-container">
     <h1>About Us</h1>
     <p>Welcome to our Student-Friendly Engineering Student Hub - your go-to resource for VTU Problem Solving. <br> We

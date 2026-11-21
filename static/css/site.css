@@ -1,0 +1,635 @@
+/* VTU Student Hub: one shared stylesheet. Light, paper-like, ink-blue. */
+
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../fonts/newsreader-normal-400-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-sans-normal-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-mono-normal-400.woff2") format("woff2");
+}
+
+:root {
+  --paper: #f6f2e9;
+  --surface: #fffdf8;
+  --ink: #1b2236;
+  --muted: #565d70;
+  --rule: #d8d1c0;
+  --accent: #1f3578;
+  --accent-ink: #ffffff;
+  --accent-soft: #e6eaf6;
+  --danger: #9b1c1c;
+
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --measure: 42rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --radius: 4px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  padding-bottom: 5rem;
+}
+
+/* Everything below the nav sits in one centred column. */
+body > *:not(nav):not(script):not(style) {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* --- Navigation ------------------------------------------------------- */
+
+#student-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 2rem;
+  max-width: none;
+  padding: 0.5rem var(--gutter);
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 2.5rem;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  text-decoration: none;
+  padding-block: 0.35rem;
+}
+
+#student-options-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.student-options-item a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 0.75rem;
+  color: var(--muted);
+  font-size: 0.97rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.student-options-item a:hover {
+  color: var(--ink);
+}
+
+.student-options-item a[aria-current="page"] {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* --- Type ------------------------------------------------------------- */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 5.5vw, 3rem);
+  margin-block: 0 1.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-block: 2.5rem 0.75rem;
+}
+
+p {
+  margin-block: 0 1rem;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- Forms ------------------------------------------------------------ */
+
+label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: left;
+  margin: 0;
+}
+
+input {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid #8f8a7b;
+  border-radius: var(--radius);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input::placeholder {
+  color: #767b8a;
+}
+
+input:hover {
+  border-color: var(--ink);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft), 0 0 0 4px var(--accent);
+}
+
+/* A field is any block that holds a label and an input. */
+div:has(> label):has(> input):not(:has(> p)) {
+  display: grid;
+  gap: 0.35rem;
+  margin-block: 0 1.1rem;
+}
+
+/* Milne takes four x/y pairs: lay them out two to a row. */
+#milne-pc-solver .container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1rem;
+}
+
+#milne-pc-solver .container > #milne-pc-function,
+#milne-pc-solver .container > #milne-pc-buttons-section,
+#milne-pc-solver .container > .buttons,
+#milne-pc-solver .container > #milne-pc-answer {
+  grid-column: 1 / -1;
+}
+
+/* Dynamic X/Y pairs: two columns, no stray line breaks. */
+.inter-data-points,
+.data-pts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1rem;
+}
+
+.inter-data-points br,
+.data-pts br {
+  display: none;
+}
+
+.invisible {
+  display: none !important;
+}
+
+/* --- Buttons ---------------------------------------------------------- */
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 1.4rem;
+  margin: 0 0.5rem 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.btn:hover {
+  background: #162760;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn[class*="reset"],
+.btn[id*="reset"] {
+  color: var(--accent);
+  background: transparent;
+}
+
+.btn[class*="reset"]:hover,
+.btn[id*="reset"]:hover {
+  background: var(--accent-soft);
+}
+
+.buttons,
+#milne-pc-buttons-section,
+.button-controls,
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.buttons:empty {
+  display: none;
+}
+
+/* "How to use" help: shown on hover, keyboard focus or tap. */
+.buttons p {
+  margin: 0 0 0.75rem 0.25rem;
+  padding: 0.5rem 0.25rem;
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 0.25em;
+  cursor: help;
+}
+
+.buttons p::after {
+  content: "Powers: x**2 or x^2. e^x is exp(x). Available: sin, cos, tan, asin, acos, atan, sinh, cosh, tanh, exp, log (natural), ln, sqrt, abs, and the constants pi and e. Use brackets to control the order of operations, for example 1/(1+x**2).";
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 0.25rem);
+  padding: 0.9rem 1rem;
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.55;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(27, 34, 54, 0.12);
+  z-index: 5;
+}
+
+.buttons p:hover::after,
+.buttons p:focus::after,
+.buttons p:focus-visible::after {
+  display: block;
+}
+
+/* --- Results ---------------------------------------------------------- */
+
+.answer-euler,
+.answer-mod-euler,
+.ans-para,
+.answer-para,
+#rk-answer,
+#milne-pc-answer {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-family: var(--font-mono);
+  font-size: 0.97rem;
+  line-height: 1.75;
+  color: var(--ink);
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.answer-euler:not(:has(p:not(:empty))),
+.answer-mod-euler:not(:has(p:not(:empty))),
+.ans-para:not(:has(p:not(:empty))),
+.answer-para:not(:has(p:not(:empty))),
+#rk-answer:not(:has(p:not(:empty))),
+#milne-pc-answer:not(:has(p:not(:empty))) {
+  display: none;
+}
+
+.answer-euler p,
+.answer-mod-euler p,
+.ans-para p,
+.answer-para p,
+#rk-answer p,
+#milne-pc-answer p {
+  margin: 0;
+  font-family: inherit;
+}
+
+.answer-euler p > br:first-child,
+.answer-para p > br:first-child,
+.ans-para p > br:first-child {
+  display: none;
+}
+
+.note {
+  margin: 0 auto 1.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+  border-left: 3px solid var(--rule);
+}
+
+/* --- Lists of links (solver index, resources, semesters) -------------- */
+
+.math-calc,
+#subjects-list a,
+.resources-list a {
+  display: flex;
+  align-items: center;
+  min-height: 3.25rem;
+  padding: 0.5rem 0.25rem;
+  color: var(--ink);
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.math-calc:first-of-type,
+#subjects-list li:first-child a,
+.resources-list li:first-child a {
+  border-top: 1px solid var(--rule);
+}
+
+.math-calc:hover,
+#subjects-list a:hover,
+.resources-list a:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+#subjects-list,
+.resources-list {
+  list-style: none;
+  padding: 0;
+}
+
+#subjects-list {
+  margin: 0 0 1.5rem;
+}
+
+.resources-list {
+  margin-block: 0 1.5rem;
+}
+
+.resources-list {
+  padding-inline: var(--gutter);
+}
+
+.resources-list a p {
+  margin: 0;
+}
+
+#page-description {
+  color: var(--muted);
+}
+
+main {
+  display: block;
+}
+
+/* --- Home ------------------------------------------------------------- */
+
+.hero {
+  padding-top: 1rem;
+}
+
+.hero .lead {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 34rem;
+  margin-bottom: 1.75rem;
+}
+
+.hero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero .actions .btn {
+  margin: 0;
+  text-decoration: none;
+}
+
+.hero .actions .btn.secondary {
+  color: var(--accent);
+  background: transparent;
+}
+
+.hero .actions .btn.secondary:hover {
+  background: var(--accent-soft);
+}
+
+.legend {
+  margin-top: 3.5rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+.legend h2 {
+  margin-top: 1.75rem;
+  font-size: 1.35rem;
+}
+
+.legend dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+  gap: 0.6rem 1.25rem;
+}
+
+.legend dt {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+
+.legend dd {
+  margin: 0;
+  color: var(--ink);
+}
+
+.fine-print {
+  margin-top: 2rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* --- About ------------------------------------------------------------ */
+
+.about-us-container p {
+  max-width: 38rem;
+}
+
+#badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-top: 1.5rem;
+}
+
+#badges p {
+  margin: 0;
+  font-weight: 500;
+}
+
+#badges a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+}
+
+/* --- SGPA calculator -------------------------------------------------- */
+
+.subjects-container {
+  display: block;
+  width: 100%;
+}
+
+.subjects-container > div[class^="sub-"] {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr) 6rem;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 0.6rem;
+}
+
+.subjects-container > div[class^="sub-"] p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.valid-marks-helper-text {
+  color: var(--danger);
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.sgpa-display {
+  margin-top: 1rem;
+}
+
+.sgpa-display .sgpa-display {
+  padding: 1.25rem 1.5rem;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.your-sgpa-text {
+  margin: 0;
+  font-size: 2rem;
+}
+
+/* --- Small screens ---------------------------------------------------- */
+
+@media (max-width: 30rem) {
+  #milne-pc-solver .container {
+    grid-template-columns: 1fr;
+  }
+
+  body {
+    font-size: 1rem;
+  }
+
+  #student-nav {
+    margin-bottom: 1.75rem;
+  }
+
+  .legend dl {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+
+  .legend dd {
+    margin-bottom: 0.8rem;
+  }
+
+  .inter-data-points,
+  .data-pts {
+    grid-template-columns: 1fr;
+  }
+
+  .subjects-container > div[class^="sub-"] {
+    grid-template-columns: 5.5rem minmax(0, 1fr) 4.5rem;
+    gap: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

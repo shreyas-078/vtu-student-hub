@@ -6,20 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math Problem Solvers</title>
     <script src="{{ url_for('static', filename='js/subjects/math/runge-kutta.js') }}" defer></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/runge-kutta.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.png')}}" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
 </head>
 
 <body>
-    <nav id="student-nav">
-        <ul id="student-options-list">
-            <li class="student-options-item"><a href="/">Home</a></li>
-            <li class="student-options-item"><a href="/about-us">About Us</a></li>
-            <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
-            <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
-            <li class="student-options-item"><a href="/resources">Resources</a></li>
-        </ul>
-    </nav>
+    {% include "_nav.html" %}
     <h1 class="heading" id="rk-heading">Runge Kutta Solver</h1>
     <section id="runge-kutta-solver">
         <div id="rk-function" class="alignment-fix">
@@ -41,7 +33,7 @@
         <div id="rk-buttons-section" class="buttons">
             <button class="btn btn-rk-answer">Calculate</button>
             <button class="btn btn-rk-reset">Reset</button>
-            <p>How to use ⓘ</p>
+            <p tabindex="0">How to use</p>
         </div>
         <div id="rk-answer">
             <p id="rk-k1" class="no-m"></p>

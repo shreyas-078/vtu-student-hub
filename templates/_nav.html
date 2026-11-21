@@ -1,0 +1,10 @@
+<nav id="student-nav" aria-label="Main">
+    <a class="brand" href="/">VTU Student Hub</a>
+    <ul id="student-options-list">
+        <li class="student-options-item"><a href="/"{% if nav_section == 'home' %} aria-current="page"{% endif %}>Home</a></li>
+        <li class="student-options-item"><a href="/about-us"{% if nav_section == 'about' %} aria-current="page"{% endif %}>About Us</a></li>
+        <li class="student-options-item"><a href="/problem-solvers"{% if nav_section == 'solvers' %} aria-current="page"{% endif %}>Problem Solvers</a></li>
+        <li class="student-options-item"><a href="/gpa-calculators"{% if nav_section == 'gpa' %} aria-current="page"{% endif %}>GPA Calculators</a></li>
+        <li class="student-options-item"><a href="/resources"{% if nav_section == 'resources' %} aria-current="page"{% endif %}>Resources</a></li>
+    </ul>
+</nav>

@@ -5,26 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milne PC Solver</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/milne-pc.css') }}">
     <script src="{{ url_for('static', filename='js/subjects/math/milne-pc.js') }}" defer></script>
     <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.png')}}" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
 </head>
 
 <body>
-    <nav id="student-nav">
-        <ul id="student-options-list">
-            <li class="student-options-item"><a href="/">Home</a></li>
-            <li class="student-options-item"><a href="/about-us">About Us</a></li>
-            <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
-            <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
-            <li class="student-options-item"><a href="/resources">Resources </a></li>
-        </ul>
-    </nav>
+    {% include "_nav.html" %}
     <section id="milne-pc-solver">
         <h1 class="heading" id="milne-pc-heading">Milne's Predictor Corrector Method Solver</h1>
         <div class="container">
             <div id="milne-pc-function" class="alignment-fix">
-                <label for=" milne-pc-function-input">Input Function:</label>
+                <label for="milne-pc-function-input">Input Function:</label>
                 <input type="text" id="milne-pc-function-input" placeholder="x**2 + y**2" class="right-align">
             </div>
             <div id=" milne-pc-x0" class="alignment-fix">
@@ -40,7 +32,7 @@
                 <input type="number" id="milne-pc-x1-input" class="right-align">
             </div>
             <div id="milne-pc-y1" class="alignment-fix">
-                <label for="milne-pc-x1-input">Enter Y(1):</label>
+                <label for="milne-pc-y1-input">Enter Y(1):</label>
                 <input type="number" id="milne-pc-y1-input" class="right-align">
             </div>
             <div id="milne-pc-x2" class="alignment-fix">
@@ -64,7 +56,7 @@
                 <button class="btn btn-milne-pc-reset">Reset</button>
             </div>
             <div class="buttons">
-                <p>How to use ⓘ</p>
+                <p tabindex="0">How to use</p>
             </div>
             <div id="milne-pc-answer">
                 <p id="milne-pc-y4p"></p>

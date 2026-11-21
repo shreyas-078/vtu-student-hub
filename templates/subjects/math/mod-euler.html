@@ -5,21 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modified Euler Method Solver</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/subjects/math/mod-euler.css') }}">
     <script src="{{ url_for('static', filename='js/subjects/math/mod-euler.js') }}" defer></script>
     <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.png')}}" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
 </head>
 
 <body>
-    <nav id="student-nav">
-        <ul id="student-options-list">
-            <li class="student-options-item"><a href="/">Home</a></li>
-            <li class="student-options-item"><a href="/about-us">About Us</a></li>
-            <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
-            <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
-            <li class="student-options-item"><a href="/resources">Resources</a></li>
-        </ul>
-    </nav>
+    {% include "_nav.html" %}
     <h1 id="mod-euler-heading">Modified Euler's Method Solver</h1>
     <p class="note">NOTE: If 2 Iterations produce the same answer up to 4 decimals, the calculator will return results
         only up
@@ -48,7 +40,7 @@
         <div class="buttons">
             <button id="calculate-mod-euler" class="btn">Calculate</button>
             <button id="reset-mod-euler" class="btn">Reset</button>
-            <p>How to use ⓘ</p>
+            <p tabindex="0">How to use</p>
         </div>
         <div class="answer-mod-euler">
             <p id="final-ans"></p>

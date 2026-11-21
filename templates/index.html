@@ -4,31 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VTU HUB</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
-    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <title>VTU Student Hub</title>
+    <meta name="description" content="Problem solvers, SGPA calculator and resources for VTU engineering students.">
     <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.png')}}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
 </head>
 
 <body>
-    <h1 id="main-heading"><a href="/">VTU STUDENT HUB</a></h1>
-    <nav id="student-nav">
-        <ul id="student-options-list">
-            <li class="student-options-item"><a href="/">Home</a></li>
-            <li class="student-options-item"><a href="/about-us">About Us</a></li>
-            <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
-            <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
-            <li class="student-options-item"><a href="/resources">Resources </a></li>
-        </ul>
-    </nav>
-    <section class="legend">
-        <h3>How to use the Function Box in Problem Solvers:</h3>
-        <p>Normally, you can use (**) for powers. Eg: 2<sup>3</sup> would be represented as 2**3 in the function box</p>
-        <p>You can use exp() to substitute for e in your expressions. For exmaple, e<sup>x</sup> would be represnted as
-            exp(x)</p>
-        <p>Enforce parantheses where needed in order to prevent unwanted BODMAS evaluation.
-        </p>
-    </section>
+    {% include "_nav.html" %}
+    <main>
+        <section class="hero">
+            <h1>VTU Student Hub</h1>
+            <p class="lead">Numerical method solvers and an SGPA calculator for VTU students, built for the answers you can't find in the textbook.</p>
+            <div class="actions">
+                <a class="btn" href="/problem-solvers">Open the problem solvers</a>
+                <a class="btn secondary" href="/gpa-calculators">Calculate SGPA</a>
+            </div>
+        </section>
+        <section class="legend">
+            <h2>Typing a function</h2>
+            <dl>
+                <dt>x**2 or x^2</dt>
+                <dd>Powers. Both forms work.</dd>
+                <dt>exp(x)</dt>
+                <dd>e raised to x. The constants e and pi are also available.</dd>
+                <dt>sin, cos, tan, log, sqrt</dt>
+                <dd>Also asin, acos, atan, sinh, cosh, tanh, ln and abs. log is the natural logarithm.</dd>
+                <dt>1/(1+x**2)</dt>
+                <dd>Use brackets wherever the order of operations matters.</dd>
+            </dl>
+            <p class="fine-print">For educational purposes only. Use it to check your own working.</p>
+        </section>
+    </main>
 </body>
 
 </html>

@@ -5,27 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resources</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/resources.css') }}">
   <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.png')}}" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
 </head>
 
 <body>
-  <nav id="student-nav">
-    <ul id="student-options-list">
-      <li class="student-options-item"><a href="/">Home</a></li>
-      <li class="student-options-item"><a href="/about-us">About Us</a></li>
-      <li class="student-options-item"><a href="/problem-solvers">Problem Solvers</a></li>
-      <li class="student-options-item"><a href="/gpa-calculators">GPA Calculators</a></li>
-      <li class="student-options-item"><a href="/resources">Resources </a></li>
-    </ul>
-  </nav>
+    {% include "_nav.html" %}
+  <h1>Resources</h1>
   <ul class="resources-list">
 
-    <li><a href="https://takeiteasyengineers.com/" target="_blank">
-        <p> Take It Easy Engineers - VTU Notes</p>
+    <li><a href="https://takeiteasyengineers.com/" target="_blank" rel="noopener">
+        Take It Easy Engineers (VTU notes)
       </a></li>
-    <li><a href="https://results.vtu.ac.in/" target="_blank">VTU Results</a></li>
-    <li><a href="https://vtu.ac.in/model-question-paper-b-e-b-tech-b-arch/" target="_blank">VTU Model Papers</a></li>
+    <li><a href="https://results.vtu.ac.in/" target="_blank" rel="noopener">VTU Results</a></li>
+    <li><a href="https://vtu.ac.in/model-question-paper-b-e-b-tech-b-arch/" target="_blank" rel="noopener">VTU Model Papers</a></li>
   </ul>
 </body>
 
