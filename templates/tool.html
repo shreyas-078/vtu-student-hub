@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ tool.title }}, VTU Student Hub</title>
+  <meta name="description" content="{{ tool.summary }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.png')}}" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+  <script src="{{ url_for('static', filename='js/tool.js') }}" defer></script>
+</head>
+
+<body class="tool-page">
+  {% include "_nav.html" %}
+  <main>
+    <p class="crumb"><a href="{{ hub[2] }}">&larr; {{ hub[0]|capitalize }} solvers</a></p>
+    <h1>{{ tool.title }}</h1>
+    <p class="lead">{{ tool.summary }}</p>
+    <p class="tags">{% for s in tool.syllabus %}<span class="tag">{{ s }}</span>{% endfor %}</p>
+    {% if tool.formula %}<p class="formula"><span>Formula</span> {{ tool.formula }}</p>{% endif %}
+
+    <form id="tool-form" data-slug="{{ tool.slug }}" data-example='{{ tool.example|tojson|forceescape }}' novalidate>
+      {% for f in tool.fields %}
+      <div class="tool-field">
+        <label for="f-{{ f.name }}">{{ f.label }}{% if f.optional %} <span class="opt">optional</span>{% endif %}</label>
+        {% if f.kind == "select" %}
+        <select id="f-{{ f.name }}" name="{{ f.name }}">
+          {% for o in f.options %}<option value="{{ o[0] }}"{% if o[0] == f.default %} selected{% endif %}>{{ o[1] }}</option>{% endfor %}
+        </select>
+        {% elif f.kind in ("matrix", "textarea") %}
+        <textarea id="f-{{ f.name }}" name="{{ f.name }}" rows="{{ f.rows }}" spellcheck="false" autocapitalize="off"></textarea>
+        {% else %}
+        <input id="f-{{ f.name }}" name="{{ f.name }}" type="text" inputmode="{{ 'numeric' if f.kind == 'int' else 'text' }}" value="{{ f.default }}" autocomplete="off" spellcheck="false" autocapitalize="off">
+        {% endif %}
+        {% if f.help %}<small>{{ f.help }}</small>{% elif f.kind == "matrix" %}<small>One row per line, entries separated by spaces. Fractions like 1/2 are fine.</small>{% elif f.kind == "vector" %}<small>Values separated by spaces or commas.</small>{% endif %}
+      </div>
+      {% endfor %}
+      <div class="buttons">
+        <button type="submit" class="btn">Calculate</button>
+        <button type="button" class="btn" id="tool-example">Fill example</button>
+        <button type="button" class="btn" id="tool-reset">Reset</button>
+      </div>
+    </form>
+
+    <section id="tool-result" aria-live="polite" tabindex="-1"></section>
+  </main>
+</body>
+
+</html>

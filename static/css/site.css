@@ -937,3 +937,35 @@ thead th {
     animation: none !important;
   }
 }
+
+/* --- Syllabus tools (templates/tool.html, hub.html) ------------------- */
+
+.tool-page main { max-width: 46rem; }
+.crumb { margin: 0 0 0.5rem; font-size: 0.95rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.25rem 0 1rem; }
+.tag { padding: 0.15rem 0.6rem; font-size: 0.8rem; color: var(--accent); background: var(--accent-soft); border-radius: 999px; }
+.formula { margin: 0 0 1.5rem; padding: 0.75rem 1rem; font-family: var(--font-mono); font-size: 0.9rem; background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-wrap: anywhere; }
+.formula span { display: block; margin-bottom: 0.2rem; font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.tool-field { display: grid; gap: 0.25rem; margin-bottom: 1rem; }
+.tool-field label { font-weight: 500; }
+.tool-field .opt { margin-left: 0.4rem; font-size: 0.75rem; font-weight: 400; color: var(--muted); }
+.tool-field small { color: var(--muted); font-size: 0.85rem; }
+.tool-field input, .tool-field textarea { width: 100%; min-height: 2.75rem; padding: 0.5rem 0.75rem; font: inherit; font-family: var(--font-mono); color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); }
+.tool-field textarea { resize: vertical; line-height: 1.5; }
+.tool-field input:focus, .tool-field textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+#tool-result { margin-top: 1.5rem; }
+#tool-result:focus { outline: none; }
+.answers { display: grid; grid-template-columns: minmax(0, max-content) minmax(0, 1fr); gap: 0.4rem 1.25rem; margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); }
+.answers dt { color: var(--muted); }
+.answers dd { margin: 0; font-family: var(--font-mono); font-weight: 500; overflow-wrap: anywhere; }
+.result-note { color: var(--muted); }
+.result-error { padding: 0.75rem 1rem; color: var(--danger); background: #fbeeee; border: 1px solid #e3b9b9; border-radius: var(--radius); }
+.table-title { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
+#tool-result td { font-family: var(--font-mono); font-size: 0.88rem; white-space: nowrap; }
+.hub-heading { font-size: 1.15rem; margin: 2rem 0 0.5rem; }
+.tool-link { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.tool-link small { color: var(--muted); font-size: 0.8rem; }
+@media (max-width: 30rem) {
+  .answers { grid-template-columns: 1fr; gap: 0; }
+  .answers dd { margin-bottom: 0.5rem; }
+}

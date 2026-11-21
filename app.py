@@ -1,8 +1,11 @@
 from functools import wraps
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, abort, jsonify, render_template, request
 
 import solvers
+import tools_math  # noqa: F401  (registers the calculators)
+import tools_physics  # noqa: F401
+import toolkit
 from solvers import InputError, number_list, to_float, to_int
 
 app = Flask(__name__, static_url_path="/static", static_folder="static")
@@ -134,7 +137,35 @@ NAV_SECTIONS = {
 @app.context_processor
 def inject_nav_section():
     """Tell the shared nav which top-level link is the current page."""
-    return {"nav_section": NAV_SECTIONS.get(request.path, "solvers")}
+    return {"nav_section": NAV_SECTIONS.get(request.path, "solvers"),
+            "tools_for": toolkit.tools_for}
+
+
+HUBS = {
+    "sem1-math": ("1st semester maths", "Calculus and Linear Algebra", "/sem1-math"),
+    "sem2-math": ("2nd semester maths", "Numerical Methods", "/sem2-math"),
+    "physics": ("Physics", "Quantum Physics and Applications", "/physics"),
+}
+
+
+@app.route("/tools/<slug>")
+def tool_page(slug):
+    t = toolkit.TOOLS.get(slug)
+    if t is None:
+        abort(404)
+    return render_template("tool.html", tool=toolkit.public_spec(t), hub=HUBS[t["hub"]])
+
+
+@app.route("/api/tools/<slug>", methods=["POST"])
+def tool_api(slug):
+    if slug not in toolkit.TOOLS:
+        abort(404)
+
+    @api
+    def run(data):
+        return toolkit.run_tool(slug, data)
+
+    return run()
 
 
 PAGES = {
@@ -143,9 +174,6 @@ PAGES = {
     "/problem-solvers": "problem-solvers.html",
     "/gpa-calculators": "gpa-calculators.html",
     "/resources": "resources.html",
-    "/sem1-math": "subjects/math/sem1-math.html",
-    "/sem2-math": "subjects/math/sem2-math.html",
-    "/physics": "subjects/physics/physics.html",
     "/runge-kutta-template": "subjects/math/runge-kutta.html",
     "/milne-pc-template": "subjects/math/milne-pc.html",
     "/euler-template": "subjects/math/euler.html",
@@ -165,6 +193,14 @@ for _path, _template in PAGES.items():
         endpoint="page_" + (_path.strip("/").replace("-", "_") or "index"),
         view_func=(lambda t=_template: render_template(t)),
     )
+
+
+def _hub_view(hub):
+    return lambda: render_template("hub.html", hub=hub, title=HUBS[hub][0], course=HUBS[hub][1])
+
+
+for _hub, (_t, _c, _path) in HUBS.items():
+    app.add_url_rule(_path, endpoint="hub_" + _hub.replace("-", "_"), view_func=_hub_view(_hub))
 
 
 if __name__ == "__main__":
