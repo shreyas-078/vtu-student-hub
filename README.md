@@ -1,6 +1,6 @@
 # VTU Student Hub
 
-A Student Platform for VTU Resources, Problem Solvers, CGPA &amp; SGPA Calculators.
+A Student Platform for VTU Resources, Problem Solvers, CGPA & SGPA Calculators.
 
 Designed As a side project for us to make use of the rather questionable Python Math Lab Programs, which were recently made part of the 2022 scheme of VTU.
 
@@ -8,7 +8,29 @@ This will also help juniors moving forward because when we were in the semester 
 
 For educational purposes only, we DO NOT CONDONE cheating using our website.
 
-THE NEXT BIG UPDATE: Will be migrating the entire application to React Router and Python instead of Vanilla Javascript
+## Run locally
+
+```bash
+python3 -m venv .venv && . .venv/bin/activate
+pip install -r requirements.txt
+python app.py        # http://localhost:8000
+```
+
+## Tests
+
+```bash
+pip install pytest
+python -m pytest
+```
+
+## Layout
+
+- `app.py`: Flask routes and request validation
+- `solvers.py`: numerical methods and the safe expression parser
+- `templates/`, `static/`: pages, styles and front-end scripts
+- `tests/`: API tests
+
+Functions are entered as expressions in `x` (and `y`), e.g. `x**2 + y`. `^` also works for powers. Supported: `sin cos tan asin acos atan sinh cosh tanh exp log ln sqrt abs`, `pi`, `e`.
 
 Contributors: Shreyas Salankimatt, Ashray Chaitanya
 
