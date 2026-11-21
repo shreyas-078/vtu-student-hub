@@ -1,0 +1,18 @@
+{% macro listing(groups, show_hub=false) %}
+{% for title, items in groups %}
+<section class="mod-group" data-group>
+  <h3 class="mod-title">{{ title }}</h3>
+  <ul class="solver-list">
+    {% for i in items %}
+    <li data-solver data-text="{{ (i.title ~ ' ' ~ i.summary ~ ' ' ~ i.tag)|lower }}">
+      <a href="{{ i.url }}">
+        <span class="s-name">{{ i.title }}</span>
+        <span class="s-desc">{{ i.summary }}</span>
+        <span class="s-tag">{{ i.tag }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
+{% endmacro %}

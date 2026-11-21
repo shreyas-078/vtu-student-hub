@@ -2,25 +2,47 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculators</title>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.png')}}" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problem Solvers, VTU Student Hub</title>
+  <meta name="description" content="{{ total }} step-by-step calculators for VTU first-year Maths and Physics, matched to the 2025 scheme syllabus.">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.png')}}" type="image/x-icon">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+  <script src="{{ url_for('static', filename='js/solver-search.js') }}" defer></script>
 </head>
 
-<body>
-    {% include "_nav.html" %}
-    <h1 id="main-heading">VTU Problem Solving Calculators</h1>
-    <main>
-        <section id="subjects-selector">
-            <ul id="subjects-list">
-                <li class="subjects-list-item"><a href="/sem1-math">1st Semester Math</a></li>
-                <li class="subjects-list-item"><a href="/sem2-math">2nd Semester Math</a></li>
-            </ul>
-            <p id="page-description">This page contains problem solving calculators for questions to
-                which you won't find an online solution.</p>
-    </main>
+<body class="solvers-page">
+  {% from "_catalog.html" import listing %}
+  {% include "_nav.html" %}
+  <main>
+    <h1>Problem solvers</h1>
+    <p class="lead">{{ total }} calculators for first-year Maths and Physics. They show the working, not only the answer, and each is tagged with the VTU course and module it belongs to.</p>
+
+    <div class="hub-cards">
+      {% for h in hubs %}
+      <a class="hub-card" href="{{ h.url }}">
+        <span class="hub-count">{{ h.count }} calculators</span>
+        <span class="hub-name">{{ h.title|capitalize }}</span>
+        <span class="hub-course">{{ h.course }}</span>
+        <span class="hub-eg">{{ h.examples|join(', ') }} and more</span>
+      </a>
+      {% endfor %}
+    </div>
+
+    <search class="solver-search">
+      <label for="solver-q">Find a calculator</label>
+      <input id="solver-q" type="search" placeholder="Try: eigen, simpson, fermi, matrix" autocomplete="off" spellcheck="false">
+      <p id="solver-count" role="status" aria-live="polite"></p>
+    </search>
+
+    {% for subject, g in groups %}
+    <section class="subject" data-subject>
+      <h2>{{ subject|capitalize }}</h2>
+      {{ listing(g) }}
+    </section>
+    {% endfor %}
+    <p id="solver-none" class="invisible">Nothing matches that. Try a shorter word, like "matrix" or "series".</p>
+  </main>
 </body>
 
 </html>

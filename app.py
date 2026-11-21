@@ -1,3 +1,4 @@
+import re
 from functools import wraps
 
 from flask import Flask, abort, jsonify, render_template, request
@@ -148,6 +149,64 @@ HUBS = {
 }
 
 
+CLASSIC = [  # (slug page, title, hub, module, summary)
+    ("/newton-raphson-template", "Newton-Raphson method", "sem2-math", "1", "Root of f(x) = 0 using the derivative."),
+    ("/regula-falsi-template", "Regula-Falsi method", "sem2-math", "1", "Root of f(x) = 0 by false position."),
+    ("/interpolation-template", "Newton's divided difference (table form)", "sem2-math", "3", "Interpolate from a table of points."),
+    ("/lagrange-template", "Lagrange interpolation", "sem2-math", "3", "Polynomial through given points, with the working."),
+    ("/trapezoidal-template", "Trapezoidal rule", "sem2-math", "5", "Numerical integration by trapezoids."),
+    ("/simpson-1-3-template", "Simpson's 1/3 rule", "sem2-math", "5", "Numerical integration with parabolic arcs."),
+    ("/simpson-3-8-template", "Simpson's 3/8 rule", "sem2-math", "5", "Numerical integration with cubic arcs."),
+    ("/euler-template", "Euler's method", "sem2-math", "5", "Step-by-step solution of y' = f(x, y)."),
+    ("/mod-euler-template", "Modified Euler's method", "sem2-math", "5", "Euler with a corrector step."),
+    ("/runge-kutta-template", "Runge-Kutta method", "sem2-math", "5", "Fourth-order solution of y' = f(x, y)."),
+    ("/milne-pc-template", "Milne's predictor-corrector", "sem2-math", "5", "Multi-step ODE method."),
+]
+
+MODULES = {
+    "sem1-math": {"1": "Multivariable calculus and series", "2": "Vector calculus", "3": "Matrices and linear systems", "4": "Vector spaces"},
+    "sem2-math": {"1": "Errors and roots of equations", "2": "Linear systems and eigenvalues", "3": "Interpolation", "5": "Integration and differential equations"},
+    "physics": {"1": "Quantum mechanics", "2": "Free electrons and semiconductors", "3": "Superconductivity", "4": "Lasers and optical fibres", "5": "Quantum computing"},
+}
+
+
+def catalog():
+    """Every calculator as one flat list: title, url, hub, module, summary, course tag."""
+    items = []
+    for t in toolkit.TOOLS.values():
+        first = t["syllabus"][0]
+        mod = re.search(r"Module (\d)", first)
+        code = first.split(" (")[0]
+        items.append({"title": t["title"], "url": "/tools/" + t["slug"], "hub": t["hub"],
+                      "module": mod.group(1) if mod else "", "summary": t["summary"], "tag": code})
+    codes = {"sem2-math": "1BMATS201"}
+    for url, title, hub, mod, summ in CLASSIC:
+        items.append({"title": title, "url": url, "hub": hub, "module": mod, "summary": summ, "tag": codes[hub]})
+    return items
+
+
+def grouped(hub):
+    """[(module title, [items])] for one hub, modules in syllabus order."""
+    items = [i for i in catalog() if i["hub"] == hub]
+    out = []
+    for m, name in MODULES[hub].items():
+        rows = sorted((i for i in items if i["module"] == m), key=lambda i: i["title"])
+        if rows:
+            out.append(("Module %s: %s" % (m, name), rows))
+    rest = [i for i in items if i["module"] not in MODULES[hub]]
+    if rest:
+        out.append(("Other streams", sorted(rest, key=lambda i: i["title"])))
+    return out
+
+
+@app.route("/problem-solvers")
+def problem_solvers():
+    hubs = [{"key": k, "title": v[0], "course": v[1], "url": v[2], "count": len([i for i in catalog() if i["hub"] == k]),
+             "examples": [i["title"] for i in catalog() if i["hub"] == k][:4]} for k, v in HUBS.items()]
+    return render_template("problem-solvers.html", hubs=hubs, groups=[(HUBS[k][0], grouped(k)) for k in HUBS],
+                           total=len(catalog()))
+
+
 @app.route("/tools/<slug>")
 def tool_page(slug):
     t = toolkit.TOOLS.get(slug)
@@ -171,7 +230,6 @@ def tool_api(slug):
 PAGES = {
     "/": "index.html",
     "/about-us": "about-us.html",
-    "/problem-solvers": "problem-solvers.html",
     "/gpa-calculators": "gpa-calculators.html",
     "/resources": "resources.html",
     "/runge-kutta-template": "subjects/math/runge-kutta.html",
@@ -196,7 +254,7 @@ for _path, _template in PAGES.items():
 
 
 def _hub_view(hub):
-    return lambda: render_template("hub.html", hub=hub, title=HUBS[hub][0], course=HUBS[hub][1])
+    return lambda: render_template("hub.html", hub=hub, title=HUBS[hub][0], course=HUBS[hub][1], groups=grouped(hub))
 
 
 for _hub, (_t, _c, _path) in HUBS.items():
