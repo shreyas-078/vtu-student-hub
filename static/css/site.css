@@ -49,6 +49,11 @@
   box-sizing: border-box;
 }
 
+::selection {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+
 html {
   overflow-x: clip;
   -webkit-text-size-adjust: 100%;
