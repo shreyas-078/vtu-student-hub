@@ -547,47 +547,331 @@ main {
   align-items: center;
 }
 
-/* --- SGPA calculator -------------------------------------------------- */
+/* --- GPA calculator ---------------------------------------------------- */
 
-.subjects-container {
-  display: block;
+body.gpa-page > main {
+  max-width: 56rem;
+}
+
+select {
   width: 100%;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid #8f8a7b;
+  border-radius: var(--radius);
 }
 
-.subjects-container > div[class^="sub-"] {
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft), 0 0 0 4px var(--accent);
+}
+
+.scheme-picker {
   display: grid;
-  grid-template-columns: 7rem minmax(0, 1fr) 6rem;
-  align-items: center;
-  gap: 0.75rem;
-  margin: 0 0 0.6rem;
+  gap: 0.35rem;
+  max-width: 28rem;
+  margin-bottom: 1.5rem;
 }
 
-.subjects-container > div[class^="sub-"] p {
-  margin: 0;
+.scheme-summary {
+  margin: 0.25rem 0 0;
   color: var(--muted);
   font-size: 0.95rem;
 }
 
-.valid-marks-helper-text {
-  color: var(--danger);
-  font-weight: 500;
-  margin-top: 0.5rem;
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
 }
 
-.sgpa-display {
+.tabs [role="tab"] {
+  flex: 0 0 auto;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  font-weight: 500;
+}
+
+.tabs [role="tab"]:hover {
+  color: var(--ink);
+}
+
+.tabs [role="tab"][aria-selected="true"] {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.tabs [role="tab"]:focus-visible,
+.remove:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.panel {
+  padding-block: 0.5rem 0.5rem;
+}
+
+.panel h2 {
   margin-top: 1rem;
 }
 
-.sgpa-display .sgpa-display {
-  padding: 1.25rem 1.5rem;
+.f label {
+  margin: 0;
+}
+
+.panel[hidden] {
+  display: none;
+}
+
+.hint {
+  margin: 0.25rem 0 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.modes {
+  border: 0;
+  padding: 0;
+  margin: 0 0 0.5rem;
+}
+
+.modes legend {
+  padding: 0;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+.modes label,
+label.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  margin-right: 1.25rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.modes input,
+.check input {
+  width: 1.15rem;
+  min-height: 0;
+  height: 1.15rem;
+  accent-color: var(--accent);
+}
+
+.courses,
+.semesters {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.course,
+.semester {
+  display: grid;
+  gap: 0.25rem 1rem;
+  padding: 0.9rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.course.fail {
+  border-left-color: var(--danger);
+}
+
+.course {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.course-fields {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.f {
+  display: grid;
+  gap: 0.25rem;
+  align-content: start;
+}
+
+.f label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.course-out {
+  min-height: 0;
+}
+
+.course-out output {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+}
+
+.why {
+  margin: 0.15rem 0 0;
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+.why:empty {
+  display: none;
+}
+
+.remove {
+  justify-self: end;
+  min-height: 2.25rem;
+  padding: 0 0.25rem;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+
+.remove:hover {
+  color: var(--danger);
+}
+
+.semester {
+  grid-template-columns: 7rem repeat(2, minmax(0, 1fr)) auto;
+  align-items: end;
+}
+
+.sem-label {
+  margin: 0 0 0.6rem;
+  font-weight: 500;
+}
+
+.planner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 14rem));
+  gap: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.planner > div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.result {
+  margin-top: 1rem;
+  padding: 1.1rem 1.4rem;
   background: var(--accent-soft);
   border-left: 3px solid var(--accent);
   border-radius: 0 var(--radius) var(--radius) 0;
 }
 
-.your-sgpa-text {
-  margin: 0;
-  font-size: 2rem;
+.result p {
+  margin: 0.2rem 0;
+}
+
+.result.small {
+  padding: 0.8rem 1.2rem;
+}
+
+.result .big {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  line-height: 1.2;
+}
+
+.result .big .k {
+  font-size: 1.1rem;
+  color: var(--muted);
+  font-family: var(--font-body);
+}
+
+.result .meta {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.result .warn {
+  color: var(--danger);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.result .placeholder {
+  color: var(--muted);
+}
+
+.reference {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+details {
+  border-bottom: 1px solid var(--rule);
+}
+
+summary {
+  padding: 0.9rem 0;
+  min-height: 2.75rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+details[open] > summary {
+  color: var(--accent);
+}
+
+details > :not(summary) {
+  margin-bottom: 1rem;
+}
+
+details ul {
+  padding-left: 1.25rem;
+}
+
+details li {
+  margin-bottom: 0.4rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+thead th {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.85rem;
 }
 
 /* --- Small screens ---------------------------------------------------- */
@@ -619,9 +903,29 @@ main {
     grid-template-columns: 1fr;
   }
 
-  .subjects-container > div[class^="sub-"] {
-    grid-template-columns: 5.5rem minmax(0, 1fr) 4.5rem;
-    gap: 0.5rem;
+  .course-fields {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .course-fields > .f:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .semester {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sem-label,
+  .semester .remove {
+    grid-column: 1 / -1;
+  }
+
+  .planner {
+    grid-template-columns: 1fr;
+  }
+
+  .result .big {
+    font-size: 2rem;
   }
 }
 

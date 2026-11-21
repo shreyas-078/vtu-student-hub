@@ -122,3 +122,21 @@ def test_bad_input_returns_400(client, path, data):
 def test_non_json_body_returns_400(client):
     r = client.post("/euler", data="nope", content_type="text/plain")
     assert r.status_code == 400
+
+
+def test_gpa_page_loads_calculator_scripts(client):
+    html = client.get("/gpa-calculators").get_data(as_text=True)
+    assert "js/vtu-grading.js" in html and "js/gpa-calci.js" in html
+    for year in ("2015", "2017", "2018", "2021", "2022", "2025"):
+        assert f'<option value="{year}"' in html
+
+
+def test_grading_rules_js():
+    """The grading rules are plain JS; run their tests under node when present."""
+    import shutil
+    import subprocess
+    node = shutil.which("node")
+    if node is None:
+        pytest.skip("node is not installed")
+    r = subprocess.run([node, "tests/test_grading.js"], capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout + r.stderr

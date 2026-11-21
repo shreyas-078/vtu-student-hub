@@ -4,68 +4,182 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2022 Scheme SGPA Calculator</title>
+  <meta name="description" content="VTU SGPA, CGPA and percentage calculator for the 2015, 2017, 2018, 2021, 2022 and 2025 schemes, built from VTU's own regulations.">
+  <title>VTU SGPA &amp; CGPA Calculator (2015 to 2025 schemes)</title>
   <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.png')}}" type="image/x-icon">
-  <script src="{{ url_for('static', filename='js/gpa-calci.js') }}" defer></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+  <script src="{{ url_for('static', filename='js/vtu-grading.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/gpa-calci.js') }}" defer></script>
 </head>
 
-<body>
+<body class="gpa-page">
   {% include "_nav.html" %}
   <main>
-    <h1>SGPA Calculator</h1>
-    <p>Enter your marks out of 100 for each subject. This uses the 2022 scheme credits (20 in total).</p>
-    <div class="subjects-container">
-      <div class="sub-1">
-        <label for="sub1-marks">Subject 1</label>
-        <input type="number" id="sub1-marks" min="0" max="100" />
-        <p>4 credits</p>
-      </div>
-      <div class="sub-2">
-        <label for="sub2-marks">Subject 2</label>
-        <input type="number" id="sub2-marks" min="0" max="100" />
-        <p>4 credits</p>
-      </div>
-      <div class="sub-3">
-        <label for="sub3-marks">Subject 3</label>
-        <input type="number" id="sub3-marks" min="0" max="100" />
-        <p>3 credits</p>
-      </div>
-      <div class="sub-4">
-        <label for="sub4-marks">Subject 4</label>
-        <input type="number" id="sub4-marks" min="0" max="100" />
-        <p>3 credits</p>
-      </div>
-      <div class="sub-5">
-        <label for="sub5-marks">Subject 5</label>
-        <input type="number" id="sub5-marks" min="0" max="100" />
-        <p>3 credits</p>
-      </div>
-      <div class="sub-6">
-        <label for="sub6-marks">Subject 6</label>
-        <input type="number" id="sub6-marks" min="0" max="100" />
-        <p>1 credit</p>
-      </div>
-      <div class="sub-7">
-        <label for="sub7-marks">Subject 7</label>
-        <input type="number" id="sub7-marks" min="0" max="100" />
-        <p>1 credit</p>
-      </div>
-      <div class="sub-8">
-        <label for="sub8-marks">Subject 8</label>
-        <input type="number" id="sub8-marks" min="0" max="100" />
-        <p>1 credit</p>
-      </div>
-      <p class="valid-marks-helper-text invisible" role="alert">Please enter valid marks (0 to 100) for every subject.</p>
-      <div class="buttons-container">
-        <button class="calculate-sgpa btn" type="button">Calculate</button>
-        <button class="reset btn" type="button">Reset</button>
-      </div>
+    <h1>SGPA &amp; CGPA calculator</h1>
+    <p class="lead">Built from VTU's own regulations for every B.E./B.Tech scheme from 2015 to 2025. Pick your scheme first, because the grade bands, pass rules and percentage formula differ.</p>
+
+    <section class="scheme-picker" aria-labelledby="scheme-label">
+      <label id="scheme-label" for="scheme">Your scheme (the year you were admitted under)</label>
+      <select id="scheme">
+        <option value="2025">2025 scheme</option>
+        <option value="2022" selected>2022 scheme</option>
+        <option value="2021">2021 scheme</option>
+        <option value="2018">2018 scheme</option>
+        <option value="2017">2017 scheme</option>
+        <option value="2015">2015 scheme</option>
+      </select>
+      <p id="scheme-summary" class="scheme-summary" aria-live="polite"></p>
+    </section>
+
+    <div class="tabs" role="tablist" aria-label="Calculator">
+      <button type="button" role="tab" id="tab-sgpa" aria-controls="panel-sgpa" aria-selected="true">SGPA</button>
+      <button type="button" role="tab" id="tab-cgpa" aria-controls="panel-cgpa" aria-selected="false" tabindex="-1">CGPA</button>
+      <button type="button" role="tab" id="tab-pct" aria-controls="panel-pct" aria-selected="false" tabindex="-1">Percentage &amp; class</button>
     </div>
-    <section class="sgpa-display invisible" aria-live="polite">
-      <div class="sgpa-display">
-        <p class="your-sgpa-text">Your SGPA is: SGPA</p>
+
+    <section id="panel-sgpa" role="tabpanel" aria-labelledby="tab-sgpa" class="panel">
+      <h2>Semester grade point average</h2>
+      <fieldset class="modes">
+        <legend>What do you have for each subject?</legend>
+        <label><input type="radio" name="mode" value="cie-see" checked> CIE and SEE marks</label>
+        <label><input type="radio" name="mode" value="total"> Total marks out of 100</label>
+        <label><input type="radio" name="mode" value="grade"> Letter grade</label>
+      </fieldset>
+      <p id="mode-help" class="hint"></p>
+
+      <ol id="courses" class="courses"></ol>
+
+      <div class="buttons-container">
+        <button type="button" class="btn" id="add-course">Add subject</button>
+        <button type="button" class="btn" id="reset-sgpa">Reset</button>
       </div>
+
+      <div id="sgpa-result" class="result" aria-live="polite"></div>
+    </section>
+
+    <section id="panel-cgpa" role="tabpanel" aria-labelledby="tab-cgpa" class="panel" hidden>
+      <h2>Cumulative grade point average</h2>
+      <p class="hint">Enter the credits and SGPA printed on each semester's grade card.</p>
+      <label class="check"><input type="checkbox" id="lateral"> Lateral entry (joined in 2nd year, so semesters start at 3)</label>
+
+      <ol id="semesters" class="semesters"></ol>
+
+      <div class="buttons-container">
+        <button type="button" class="btn" id="add-sem">Add semester</button>
+        <button type="button" class="btn" id="use-sgpa" hidden>Add the SGPA from the SGPA tab</button>
+        <button type="button" class="btn" id="reset-cgpa">Reset</button>
+      </div>
+
+      <div id="cgpa-result" class="result" aria-live="polite"></div>
+      <p id="cgpa-note" class="hint"></p>
+
+      <h3>Target planner</h3>
+      <p class="hint">What SGPA do you need over the remaining credits to finish on a target CGPA? It uses the CGPA and credits entered above.</p>
+      <div class="planner">
+        <div><label for="plan-target">Target CGPA</label><input id="plan-target" type="number" inputmode="decimal" min="0" max="10" step="0.01" placeholder="8.50"></div>
+        <div><label for="plan-credits">Credits still to go</label><input id="plan-credits" type="number" inputmode="numeric" min="1" step="1" placeholder="80"></div>
+      </div>
+      <div id="plan-result" class="result small" aria-live="polite"></div>
+    </section>
+
+    <section id="panel-pct" role="tabpanel" aria-labelledby="tab-pct" class="panel" hidden>
+      <h2>CGPA to percentage and class</h2>
+      <div class="planner">
+        <div><label for="pct-cgpa">CGPA</label><input id="pct-cgpa" type="number" inputmode="decimal" min="0" max="10" step="0.01" placeholder="8.20"></div>
+      </div>
+      <div id="pct-result" class="result" aria-live="polite"></div>
+      <p id="pct-note" class="hint"></p>
+    </section>
+
+    <section class="reference" aria-labelledby="how-heading">
+      <h2 id="how-heading">How VTU calculates it</h2>
+
+      <details open>
+        <summary>Grade points for your scheme</summary>
+        <div id="grade-table" class="table-wrap"></div>
+        <p class="hint">An F carries 0 points and means you reappear for that subject. Grades such as AB (absent), NE, NS, NP, DX, PP and W carry no grade points and are not part of the 10-point scale.</p>
+      </details>
+
+      <details>
+        <summary>The formulas</summary>
+        <p><strong>SGPA</strong> = Σ(credits × grade point) ÷ Σ credits, over the subjects of one semester. A subject with an F still counts its credits, with 0 points, so a single F pulls the SGPA down hard.</p>
+        <p><strong>CGPA</strong> = Σ(credits × grade point) ÷ Σ credits, over every subject so far. Because a semester's SGPA is itself credit-weighted, this equals Σ(semester credits × SGPA) ÷ Σ credits. Both come out the same when you have no outstanding F.</p>
+        <p>Both are rounded to 2 decimals and reported on the grade card. CGPA starts from semester 2, or from semester 4 for lateral entry (2025 regulations).</p>
+        <p><strong>Worked example</strong> (the 2025 regulations' own table): subjects of 3, 3, 3, 3, 3, 1, 1, 2 and 1 credits with grade points 8, 0 (absent), 9, 0, 6, 5, 9, 6 and 6 give credit points 24 + 0 + 27 + 0 + 18 + 5 + 9 + 12 + 6 = 101 over 20 credits, so SGPA = 5.05.</p>
+      </details>
+
+      <details>
+        <summary>Pass rules (what turns a subject into an F)</summary>
+        <ul>
+          <li><strong>SEE:</strong> at least 35% of the SEE maximum. For a paper marked out of 100 and scaled to 50, that is 18 of 50.</li>
+          <li><strong>Total:</strong> CIE plus SEE must reach 40% of the course maximum.</li>
+          <li><strong>CIE:</strong> from the 2021 scheme, at least 40% of 50 (20 marks). The 2018 scheme needs 16 of 40 in theory subjects. The 2017 regulations set no CIE minimum for theory.</li>
+          <li><strong>Absent for the SEE</strong> is an F.</li>
+          <li>This calculator applies the CIE, SEE and total rules to theory subjects. Practical, internship, project and seminar subjects have their own minimums (for example 50% of CIE in practicals under the 2017 scheme), so enter those as a total or letter grade.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Percentage and class: why it depends on the scheme</summary>
+        <ul>
+          <li><strong>2021, 2022, 2025:</strong> percentage = CGPA × 10. Example: 8.20 gives 82.0%.</li>
+          <li><strong>2015, 2017, 2018:</strong> percentage = (CGPA − 0.75) × 10. Example: 8.20 gives 74.5%.</li>
+          <li>Many calculator sites apply the 0.75 formula to every scheme. VTU applies it only to the three older ones.</li>
+          <li><strong>Class, 2021 onward:</strong> First Class with Distinction at 70% or more, First Class from 60 to under 70, Second Class from 50 to under 60, Pass Class from 40 to under 50.</li>
+          <li><strong>Class, 2017 and 2018:</strong> First Class with Distinction at 70% or more, First Class from 60 to under 70, Second Class below 60. The 2015 text I read does not define the bands.</li>
+          <li>The class applies to the final CGPA, after you complete the programme.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>F grades and the CGPA</summary>
+        <p>The CGPA tab uses each semester's printed SGPA, which is right when you have no outstanding F.</p>
+        <ul>
+          <li><strong>2021 and 2022:</strong> VTU's formula leaves out subjects holding an F, so an unresolved backlog is not averaged in as a zero.</li>
+          <li><strong>2025:</strong> CGPA is taken over courses successfully completed.</li>
+          <li><strong>2015 to 2018:</strong> the regulations average over all courses undergone. When you clear a backlog, the grade from the re-attempt is awarded (the 2015 scheme awards E regardless of marks).</li>
+          <li>If you have a backlog, check the figure against your grade card.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>All schemes side by side</summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Scheme</th><th scope="col">Letters (grade points)</th><th scope="col">CIE / SEE</th><th scope="col">Percentage</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">2025</th><td>O 10, A+ 9, A 8, B+ 7, B 6, C 5, P 4, F 0</td><td>50 / 50</td><td>CGPA × 10</td></tr>
+              <tr><th scope="row">2022</th><td>O 10, A+ 9, A 8, B+ 7, B 6, C 5, P 4, F 0</td><td>50 / 50</td><td>CGPA × 10</td></tr>
+              <tr><th scope="row">2021</th><td>O 10, A+ 9, A 8, B+ 7, B 6, C 5, P 4, F 0</td><td>50 / 50</td><td>CGPA × 10</td></tr>
+              <tr><th scope="row">2018</th><td>S 10, A 9, B 8, C 7, D 6, E 4, F 0</td><td>40 / 60</td><td>(CGPA − 0.75) × 10</td></tr>
+              <tr><th scope="row">2017</th><td>S 10, A 9, B 8, C 7, D 6, E 4, F 0</td><td>40 / 60</td><td>(CGPA − 0.75) × 10</td></tr>
+              <tr><th scope="row">2015</th><td>O 10, S 9, A 8, B 7, C 6, D 5, E 4, F 0</td><td>not modelled</td><td>(CGPA − 0.75) × 10</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Sources and limits</summary>
+        <p>Every figure comes from VTU's published regulations:</p>
+        <ul class="sources">
+          <li>2025: clauses 25OB22.0 and 25OB25.0 to 25OB27.0. <a href="https://vtu.ac.in/wp-content/uploads/2026/05/B.E.B.Tech2025.pdf" rel="noopener" target="_blank">PDF</a></li>
+          <li>2022: clauses 6.1 to 6.8. <a href="https://vtu.ac.in/wp-content/uploads/2023/02/Regulations-BE-2022-FB-Gen-V4.pdf" rel="noopener" target="_blank">PDF</a></li>
+          <li>2021: clauses 21OB12.2 and 21OB13.1 to 21OB13.3. <a href="https://vtu.ac.in/pdf/regulations2021/finalreg2021.pdf" rel="noopener" target="_blank">PDF</a></li>
+          <li>2018: clauses 18OB6.0, 18OB7.0 and 18OB8.0. <a href="https://vtu.ac.in/wp-content/uploads/2019/03/be201819.pdf" rel="noopener" target="_blank">PDF</a></li>
+          <li>2017: clauses 17OB6.0, 17OB7.0 and 17OB9.1. <a href="https://vtu.ac.in/wp-content/uploads/2019/12/becbcs2017-18.pdf" rel="noopener" target="_blank">PDF</a></li>
+          <li>2015: clauses 15OB11 and 15OB12. <a href="https://vtu.ac.in/wp-content/uploads/2019/12/becbcs2015-16.pdf" rel="noopener" target="_blank">PDF</a></li>
+        </ul>
+        <p>Limits you should know about:</p>
+        <ul>
+          <li>The 2015 table prints the S band's lower bound ambiguously. This page uses 80, which follows the other bands.</li>
+          <li>VTU does not say how it rounds a scaled SEE mark. This page rounds half up, so a paper of 35 out of 100 scales to 18 of 50 and passes.</li>
+          <li>The 2025 regulations are dated May 2026. VTU may issue circulars that change details.</li>
+          <li>This is an unofficial estimate. Your grade card is the authority.</li>
+        </ul>
+      </details>
     </section>
   </main>
 </body>

@@ -21,6 +21,7 @@ python app.py        # http://localhost:8000
 ```bash
 pip install pytest
 python -m pytest
+node tests/test_grading.js   # optional: SGPA/CGPA rules, checked against VTU's printed examples
 ```
 
 ## Layout
@@ -28,7 +29,8 @@ python -m pytest
 - `app.py`: Flask routes and request validation
 - `solvers.py`: numerical methods and the safe expression parser
 - `templates/`, `static/`: pages, styles and front-end scripts
-- `tests/`: API tests
+- `static/js/vtu-grading.js`: VTU grading rules (2015 to 2025 schemes), no DOM
+- `tests/`: API tests and grading-rule tests
 
 Functions are entered as expressions in `x` (and `y`), e.g. `x**2 + y`. `^` also works for powers. Supported: `sin cos tan asin acos atan sinh cosh tanh exp log ln sqrt abs`, `pi`, `e`.
 
